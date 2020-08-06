@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'api'], function() {
+    Route::post('/register', 'RegistrasiController@register')->name('register');
+    Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
+    Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
 });
