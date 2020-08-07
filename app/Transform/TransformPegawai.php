@@ -2,30 +2,9 @@
 
 namespace App\Transform;
 
-class TransformPegawai extends ResponseTransform
+class TransformPegawai
 {
-    public function all($params)
-    {
-        if(!$params) {
-            $data = $this->responseError("Data Tidak Tersedia!");
-            return response()->json($data)->getData();
-        }
-        $data = $this->responseTransform($this->mapperAll($params));
-        return response()->json($data)->getData();
-    }
-
-    public function detail($params)
-    {
-        if (!$params) {
-            $data = $this->responseError("Data Tidak ditemukan!");
-            return response()->json($data)->getData();
-        }
-        $data = $this->responseTransform($this->mapperFirst($params));
-        return response()->json($data)->getData();
-
-    }
-
-    private function mapperAll($table)
+    public function mapperAll($table)
     {
         foreach ($table as $value) {
             $data["pegawai"][] = [
@@ -40,7 +19,7 @@ class TransformPegawai extends ResponseTransform
         return $data;
     }
 
-    private function mapperFirst($table)
+    public function mapperFirst($table)
     {
         $data["pegawai"] = [
                 'nip'            => $table->nip,

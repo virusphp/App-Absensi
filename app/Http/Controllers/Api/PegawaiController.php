@@ -21,15 +21,25 @@ class PegawaiController extends Controller
 
     public function getPegawai()
     {
-        $pegawai   = $this->pegawai->getPegawai();
-        $transform = $this->transform->all($pegawai);
-        return response()->json($transform);
+        $data   = $this->pegawai->getPegawai();
+
+        if(!$data) {
+            return response()->jsonError(false, "Data tidak ditemukan!", $data);
+        }
+
+        $transform = $this->transform->mapperAll($data);
+        return response()->jsonSuccess(true, "Data Ditemukan", $transform);
     }
 
     public function getPegawaiDetail($kodaPegawai)
     {
-        $pegawai = $this->pegawai->getPegawaiDetail($kodaPegawai);
-        $transform = $this->transform->detail($pegawai);
-        return response()->json($transform);
+        $data = $this->pegawai->getPegawaiDetail($kodaPegawai);
+
+        if(!$data) {
+            return response()->jsonError(false, "Data tidak ditemukan!", $data);
+        }
+
+        $transform = $this->transform->mapperFirst($data);
+        return response()->jsonSuccess(true, "Data Ditemukan", $transform);
     }
 }
