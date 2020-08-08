@@ -12,10 +12,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['namespace' => 'Api'], function() {
+Route::group(['namespace' => 'Api', 'middleware' => ['signature:api']], function() {
     Route::post('/register', 'RegistrasiController@register')->name('register');
     Route::post('/login', 'LoginController@login')->name('login');
-
     Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
     
 
