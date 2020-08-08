@@ -8,6 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class Akun
 {
+    public function verif($params)
+    {
+        return DB::connection('sqlsrv_simrs')->table('pegawai')->select('kd_pegawai')
+            ->where([
+                ['kd_pegawai', $params->kode_pegawai],
+                ['tempat_lahir', $params->tempat_lahir],
+                ['tgl_lahir', $params->tanggal_lahir]
+            ])
+            ->first();
+    }
+
     public function getAkun($kode)
     {
         return DB::connection('sqlsrv_sms')

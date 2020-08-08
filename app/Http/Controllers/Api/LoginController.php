@@ -33,7 +33,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($data)) {
             $akun =  $this->akun->getAkun($data["kd_pegawai"]);
-            $transform = $this->transform->mapperLogin($akun);
+            $transform = $this->transform->mapperFirst($akun);
 
             return response()->jsonSuccess(true, "Login Sukses!", $transform);
         }
