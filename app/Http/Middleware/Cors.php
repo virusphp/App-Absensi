@@ -3,9 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use DB;
+use App\User;
 
 class Cors
 {
+    protected $_RESPONSE = array('status' => false, 'message' => '', 'data' => array());
     /**
      * Handle an incoming request.
      *
@@ -13,13 +16,22 @@ class Cors
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        dd($request->header("Authorization"));
-        $response = $next($request);
+        if(!$request->hasHeader('x-token-x')) {
+            return response()->jsonError(false, "Header tidak diketahui!",['header' => 'header tidak di ketahui']);
+        }
 
-        $response->headers->set('Authorization', 'Bearer '.$request->bearerToken());
-        
-        return $response;
+        $token = $request->header('x-token-x');
+        $user = DB::connection('sqlsrv_sms')->table('akun')->where('api_token', '=', $token)->first();
+
+        if (!$user) {
+            return response()->jsonError(false, "Token tidak diketahui", ['x-token-x' => 'Token Tidak di ketahui!']);
+        }
+
+        return $next($request)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'x-token-x, X-Requested-With, Content-Type, X-Token-Auth, Authorization');
     }
 }

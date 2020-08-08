@@ -14,9 +14,12 @@ use Illuminate\Http\Request;
 */
 Route::group(['namespace' => 'api'], function() {
     Route::post('/register', 'RegistrasiController@register')->name('register');
+    Route::post('/login', 'LoginController@login')->name('login');
+
+    Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
+    
 
     Route::group(["middleware" => ["cors:api",]], function() {
-        Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
         Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
     });
 });
