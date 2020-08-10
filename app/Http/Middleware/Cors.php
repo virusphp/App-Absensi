@@ -19,7 +19,7 @@ class Cors
     public function handle($request, Closure $next)
     {
         if(!$request->hasHeader('x-token-x')) {
-            return response()->jsonError(false, "Header user tidak diketahui!",['header' => 'header user tidak di ketahui']);
+            return response()->jsonError(false, "Unauthorized",['header' => 'header user tidak di ketahui!']);
         }
 
         $token = $request->header('x-token-x');

@@ -12,11 +12,17 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['namespace' => 'Api', 'middleware' => ['signature:api']], function() {
-    Route::post('/register', 'RegistrasiController@register')->name('register');
-    Route::post('/login', 'LoginController@login')->name('login');
-    Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
-    
+
+Route::group(['namespace' => 'Api'], function() {
+
+    Route::post('/access/register', 'RegistrasiPlatformController@register')->name('register.acceess');
+    Route::post('/access/login', 'LoginPlatformController@login')->name('login.acceess');
+
+    Route::group(['middleware' => ['signature:api']], function (){
+        Route::post('/register', 'RegistrasiController@register')->name('register');
+        Route::post('/login', 'LoginController@login')->name('login');
+        Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
+    });
 
     Route::group(["middleware" => ["cors:api",]], function() {
         Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');

@@ -19,14 +19,14 @@ class Akun
             ->first();
     }
 
-    public function getAkun($kode)
+    public function getProfil($username)
     {
         return DB::connection('sqlsrv_sms')
             ->table('akun as a')
             ->select('a.kd_pegawai','a.mac_address', 'a.status_update','a.created_at','a.updated_at','a.api_token',
                     'p.nama_pegawai','p.gelar_depan','p.gelar_belakang','p.unit_kerja')
             ->join('dbsimrs.dbo.pegawai as p', 'a.kd_pegawai','=', 'p.kd_pegawai')
-            ->where('a.kd_pegawai', $kode)
+            ->where('a.kd_pegawai', $username)
             ->first();
     }
 

@@ -29,10 +29,10 @@ class LoginController extends Controller
             return response()->jsonError(false, "Ada Kesalahan", $message);
         }
 
-        $data = ["kd_pegawai" => $r->kode_pegawai, "password" => $r->password];
+        $data = ["kd_pegawai" => $r->username, "password" => $r->password];
 
-        if (Auth::attempt($data)) {
-            $akun =  $this->akun->getAkun($data["kd_pegawai"]);
+        if (Auth::guard("akun")->attempt($data)) {
+            $akun =  $this->akun->getProfil($data["kd_pegawai"]);
             $transform = $this->transform->mapperFirst($akun);
 
             return response()->jsonSuccess(true, "Login Sukses!", $transform);

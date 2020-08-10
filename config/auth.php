@@ -41,6 +41,16 @@ return [
             'provider' => 'users',
         ],
 
+        'akun' => [
+            'driver' => 'session',
+            'provider' => 'akun',
+        ], 
+
+        'access' => [
+            'driver' => 'session',
+            'provider' => 'access',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'akun',
@@ -70,6 +80,19 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'api' => [
+            'driver' => 'database',
+            'table' => 'akun'
+        ],
+        'akun' => [
+            'driver' => 'eloquent',
+            'model' => App\User::class,
+        ],
+        'access' => [
+            'driver' => 'eloquent',
+            'model' => App\Access::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',

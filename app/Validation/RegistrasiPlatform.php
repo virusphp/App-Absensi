@@ -3,13 +3,17 @@
 namespace App\Validation;
 use Validator;
 
-class LoginValidation
+class RegistrasiPlatform
 {
     public function rules($request)
     {
         return Validator::make($request->all(), [
-            'username' => 'required',
+            'nama' => 'required',
+            'username' => 'required|min:5|unique:access,username',
+            'email' => 'required|min:5|unique:access,email',
             'password' => 'required',
+            'repassword' => 'required|same:password|min:6',
+            'phone' => 'required|min:10',
         ]);
     }
 
@@ -21,5 +25,6 @@ class LoginValidation
                 $error[$key] = $value[0]; 
         }
         return $error;
+        
     }
 }
