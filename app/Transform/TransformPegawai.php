@@ -22,7 +22,10 @@ class TransformPegawai
     public function mapperFirst($table)
     {
         $data["pegawai"] = [
+                'nip'            => $table->nip,
+                'kode_pegawai'   => $table->kd_pegawai,
                 'nama_pegawai'   => $table->nama_pegawai,
+                'tanggal_lahir'  => date("Y-m-d", strtotime($table->tgl_lahir)),
                 'gelar_depan'    => $table->gelar_depan,
                 'gelar_belakang' => $table->gelar_belakang,
                 'unit'           => $table->nama_sub_unit,
