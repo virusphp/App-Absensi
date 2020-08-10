@@ -22,9 +22,10 @@ Route::group(['namespace' => 'Api'], function() {
         Route::post('/register', 'RegistrasiController@register')->name('register');
         Route::post('/login', 'LoginController@login')->name('login');
         Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
+        Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
     });
 
     Route::group(["middleware" => ["cors:api",]], function() {
-        Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
+
     });
 });

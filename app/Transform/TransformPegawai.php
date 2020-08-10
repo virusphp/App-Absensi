@@ -22,8 +22,6 @@ class TransformPegawai
     public function mapperFirst($table)
     {
         $data["pegawai"] = [
-                'nip'            => $table->nip,
-                'kode_pegawai'   => $table->kd_pegawai,
                 'nama_pegawai'   => $table->nama_pegawai,
                 'gelar_depan'    => $table->gelar_depan,
                 'gelar_belakang' => $table->gelar_belakang,
