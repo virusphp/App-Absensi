@@ -9,3 +9,8 @@ function generate_token($kode, $password)
     $encodeSignature = base64_encode($signataure);
     return $encodeSignature;
 }
+
+function absensi($status)
+{
+    return $status == 0 ? "Masuk" : "Keluar";
+}

@@ -28,7 +28,7 @@ class ResponseServiceProvider extends ServiceProvider
             $format = [
                 'ok' => $ok,
                 'message' => $message,
-                'response' => $data
+                'result' => $data
             ];
 
             return $factory->make($format);
@@ -38,7 +38,7 @@ class ResponseServiceProvider extends ServiceProvider
             $format = [
                 'ok' => $ok,
                 'message' => $message,
-                'response' => $data
+                'result' => $data
             ];
 
             return $factory->make($format);
