@@ -10,13 +10,6 @@ class Absen
     public function simpan($params)
     {
         try {
-            $absen = $this->cekAbsenAwal($params);
-
-            if ($absen)
-            {
-              return response()->jsonError(false, "Sudah Absen!!", "Sudah pernah absen ".absensi($params->status_absen)); 
-            }
-
             $absen =  DB::table('absensi')->insert([
                 'kd_pegawai'   => $params->kode_pegawai,
                 'tanggal'      => $params->tanggal,
@@ -24,23 +17,21 @@ class Absen
                 'kd_sub_unit'  => $params->kd_sub_unit,
             ]);
 
-            if (!$absen) {
-              return responst()->jsonError(false, "Error Transaction", "error proses insert data"); 
-            }
-
-             $absen = DB::table('absensi')
+            if ($absen) {
+              $absen = DB::table('absensi')
                     ->select('tanggal','status_absen')
                     ->where('kd_pegawai', $params->kode_pegawai)
                     ->first();
-
-            return $absen;
+            }
+            
+            throw Exception(["ok" => false, "message" => "Error inserting data", "result" => "none"]);
 
         } catch (Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function cekAbsenAwal($params)
+    public function cekAbsen($params)
     {
         return DB::table('absensi')->where([
             ['tanggal', $params->tanggal],
