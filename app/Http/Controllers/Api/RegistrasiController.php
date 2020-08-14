@@ -29,10 +29,10 @@ class RegistrasiController extends ApiController
             return response()->jsonError(false, "Ada Kesalahan", $message);
         }
 
-        $verified = $this->akun->verif($r);
-        if (!$verified) {
-            return response()->jsonError(false, "Ada Kesalahan Verifikasi data", ["Tempat lahir | Tanggal Lahir tidak sesuai","Silahkan menghubungi kepegawaian!"]);
-        }
+        // $verified = $this->akun->verif($r);
+        // if (!$verified) {
+        //     return response()->jsonError(false, "Ada Kesalahan Verifikasi data", ["Tempat lahir | Tanggal Lahir tidak sesuai","Silahkan menghubungi kepegawaian!"]);
+        // }
 
         $akun = $this->akun->simpan($r);
 

@@ -18,6 +18,7 @@ class Pegawai
 
     public function getPegawaiDetail($kodePegawai)
     {
+        dd($kodePegawai);
          return DB::connection('sqlsrv_simrs')->table('pegawai as p')->select(
             'p.kd_pegawai', 'p.nama_pegawai', 'p.tgl_lahir', 'p.alamat', 'p.nip', 'p.gelar_depan', 'p.gelar_belakang',
             'su.nama_sub_unit'
