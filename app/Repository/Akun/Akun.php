@@ -10,13 +10,15 @@ class Akun
 {
     public function verif($params)
     {
-        return DB::connection('sqlsrv_simrs')->table('pegawai')->select('kd_pegawai')
-            ->where([
-                ['kd_pegawai', $params->kode_pegawai],
-                ['tempat_lahir', $params->tempat_lahir],
-                ['tgl_lahir', $params->tanggal_lahir]
-            ])
-            ->first();
+        return DB::connection('sqlsrv_simrs')
+        ->table('pegawai')
+        ->select('kd_pegawai', 'nip','tgl_lahir',
+                'nama_pegawai','gelar_depan','gelar_belakang')
+        ->where([
+            ['kd_pegawai', $params->kode_pegawai],
+            ['tgl_lahir', $params->tanggal_lahir]
+        ])
+        ->first();
     }
 
     public function getProfil($username)

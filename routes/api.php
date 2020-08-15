@@ -19,6 +19,7 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/access/login', 'LoginPlatformController@login')->name('login.acceess');
 
     Route::group(['middleware' => ['signature:api']], function (){
+        Route::post('/pegawai/verif', "RegistrasiController@verified");
         Route::post('/register', 'RegistrasiController@register')->name('register');
         Route::post('/login', 'LoginController@login')->name('login');
         Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
