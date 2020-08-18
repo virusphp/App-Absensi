@@ -22,9 +22,9 @@ class TransformAkun
         if ($table->gelar_depan == "-" && $table->gelar_belakang == "-") {
             $nama = $table->nama_pegawai;
         } else if($table->gelar_depan == "-") {
-            $nama = $table->nama_pegawai. " ". $table->gelar_belakang;
+            $nama = $table->nama_pegawai. ",". $table->gelar_belakang;
         } else if($table->gelar_belakang == "-") {
-            $nama = $table->gelar_depan. " ". $table->nama_pegawai;
+            $nama = $table->gelar_depan. ".". $table->nama_pegawai;
         } else {
             $nama = $table->gelar_depan. ".". $table->nama_pegawai. "," . $table->gelar_belakang;
         }
