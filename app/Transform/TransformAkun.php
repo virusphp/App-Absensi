@@ -2,7 +2,7 @@
 
 namespace App\Transform;
 
-class TransformAkun
+class TransformAkun extends Transform
 {
     public function mapperLogin($table)
     {
@@ -19,15 +19,9 @@ class TransformAkun
 
     public function mapperFirst($table)
     {
-        if ($table->gelar_depan == "-" && $table->gelar_belakang == "-") {
-            $nama = $table->nama_pegawai;
-        } else if($table->gelar_depan == "-") {
-            $nama = $table->nama_pegawai. ",". $table->gelar_belakang;
-        } else if($table->gelar_belakang == "-") {
-            $nama = $table->gelar_depan. ".". $table->nama_pegawai;
-        } else {
-            $nama = $table->gelar_depan. ".". $table->nama_pegawai. "," . $table->gelar_belakang;
-        }
+        // dd($table);
+        $nama = $this->getNama($table);
+        // $foto = $this->getFoto($table->kd_pegawai, $table->foto);
 
         $unit = [
             'kode_unit' => $table->kd_sub_unit,
@@ -40,6 +34,7 @@ class TransformAkun
                 'kode_pegawai' => $table->kd_pegawai,
                 'nama_pegawai' => $nama,
                 'unit'         => $unit,
+                // 'foto'         => $foto,
                 'created_at'   => $table->created_at,
                 'updated_at'   => $table->updated_at,
         ];

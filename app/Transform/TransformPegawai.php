@@ -2,7 +2,7 @@
 
 namespace App\Transform;
 
-class TransformPegawai
+class TransformPegawai extends Transform
 {
     public function mapperAll($table)
     {
@@ -21,16 +21,9 @@ class TransformPegawai
 
     public function mapperFirst($table)
     {
-        if ($table->gelar_depan == "-" && $table->gelar_belakang == "-") {
-            $nama = $table->nama_pegawai;
-        } else if($table->gelar_depan == "-") {
-            $nama = $table->nama_pegawai. ",". $table->gelar_belakang;
-        } else if($table->gelar_belakang == "-") {
-            $nama = $table->gelar_depan. ".". $table->nama_pegawai;
-        } else {
-            $nama = $table->gelar_depan. ".". $table->nama_pegawai. "," . $table->gelar_belakang;
-        }
-
+       
+        $nama = $this->getNama($table);
+        
         $unit = [
             'kode_unit' => $table->kd_sub_unit,
             'nama_unit' => $table->nama_sub_unit
