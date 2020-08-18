@@ -35,8 +35,6 @@ class TransformAkun
         ];
 
         $data["akun"] = [
-                'mac_address'    => $table->mac_address,
-                'nama_device'    => $table->device,
                 'kode_pegawai'   => $table->kd_pegawai,
                 'nama_pegawai' => $nama,
                 'unit'           => $unit,

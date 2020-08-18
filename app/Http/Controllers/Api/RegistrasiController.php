@@ -36,6 +36,7 @@ class RegistrasiController extends ApiController
         // }
 
         $akun = $this->akun->simpan($r);
+        // dd($akun);
 
         if ($akun) {
             $transform = $this->transform->mapperFirst($akun);
