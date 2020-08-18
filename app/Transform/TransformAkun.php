@@ -35,11 +35,13 @@ class TransformAkun
         ];
 
         $data["akun"] = [
-                'kode_pegawai'   => $table->kd_pegawai,
+                'mac_address'  => $table->mac_address,
+                'nama_device'  => $table->device,
+                'kode_pegawai' => $table->kd_pegawai,
                 'nama_pegawai' => $nama,
-                'unit'           => $unit,
-                'created_at'     => $table->created_at,
-                'updated_at'     => $table->updated_at,
+                'unit'         => $unit,
+                'created_at'   => $table->created_at,
+                'updated_at'   => $table->updated_at,
         ];
 
         $data["api_token"] = $table->api_token;
