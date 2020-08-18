@@ -28,19 +28,22 @@ class TransformPegawai
         } else if($table->gelar_belakang == "-") {
             $nama = $table->gelar_depan. " ". $table->nama_pegawai;
         } else {
-            $nama = $table->gelar_depan. " ". $table->nama_pegawai. " " . $table->gelar_belakang;
+            $nama = $table->gelar_depan. ".". $table->nama_pegawai. "," . $table->gelar_belakang;
         }
 
-        $data["pegawai"]        =  [
-                'nip'           => $table->nip,
-                'kode_pegawai'  => $table->kd_pegawai,
-                'nama_pegawai'  => $nama,
-                'tanggal_lahir' => date("Y-m-d", strtotime($table->tgl_lahir)),
-        ];
-
-        $data["pegawai"]["unit"] = [
+        $unit = [
             'kode_unit' => $table->kd_sub_unit,
             'nama_unit' => $table->nama_sub_unit
+        ];
+
+        $data["akun"] = [
+                'mac_address'  => $table->mac_address,
+                'nama_device'  => $table->device,
+                'kode_pegawai' => $table->kd_pegawai,
+                'nama_pegawai' => $nama,
+                'unit'         => $unit,
+                'created_at'   => $table->created_at,
+                'updated_at'   => $table->updated_at,
         ];
 
         return $data;

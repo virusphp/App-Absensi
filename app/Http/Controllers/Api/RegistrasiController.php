@@ -56,7 +56,7 @@ class RegistrasiController extends ApiController
         $verified = $this->akun->verif($r);
         // dd($verified);
         if (!$verified) {
-            return response()->jsonError(201, "Ada Kesalahan Verifikasi data", "Tempat lahir dan Tanggal Lahir tidak sesuai, Silahkan menghubungi kepegawaian!");
+            return response()->jsonError(201, "Ada Kesalahan Verifikasi data", "Sub Unit dan Tanggal Lahir tidak sesuai, Silahkan menghubungi kepegawaian!");
         }
 
         $transform = $this->transform->mapperVerif($verified);

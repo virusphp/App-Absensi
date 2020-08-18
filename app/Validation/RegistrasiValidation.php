@@ -10,6 +10,7 @@ class RegistrasiValidation
         return Validator::make($request->all(), [
             'kode_pegawai' => 'required|min:5|unique:akun,kd_pegawai',
             'mac_address' => 'required',
+            'nama_device' => 'required',
             'tanggal_lahir' => 'required',
             'password' => 'required|min:6',
             'repassword' => 'required|same:password|min:6'

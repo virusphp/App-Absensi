@@ -16,7 +16,8 @@ class Akun
                 'nama_pegawai','gelar_depan','gelar_belakang')
         ->where([
             ['kd_pegawai', $params->kode_pegawai],
-            ['tgl_lahir', $params->tanggal_lahir]
+            ['tgl_lahir', $params->tanggal_lahir],
+            ['kd_sub_unit', '!=', 0]
         ])
         ->first();
     }
@@ -32,7 +33,7 @@ class Akun
     {
         return DB::connection('sqlsrv_sms')
             ->table('akun as a')
-            ->select('a.kd_pegawai','a.mac_address', 'a.status_update','a.created_at','a.updated_at',
+            ->select('a.kd_pegawai','a.mac_address', 'device', 'a.status_update','a.created_at','a.updated_at',
                     'a.api_token','p.nama_pegawai','p.gelar_depan','p.gelar_belakang','su.kd_sub_unit',
                     'su.nama_sub_unit')
             ->join('dbsimrs.dbo.pegawai as p', 'a.kd_pegawai','=', 'p.kd_pegawai')
@@ -45,11 +46,12 @@ class Akun
     {
         try {
             $akun =  DB::table('akun')->insert([
-                'kd_pegawai' => $params->kode_pegawai,
+                'kd_pegawai'  => $params->kode_pegawai,
                 'mac_address' => $params->mac_address,
-                'password' => bcrypt($params->password),
-                'api_token' => generate_token($params->kode_pegawai, $params->password),
-                'created_at' => Carbon::now(),
+                'device'      => $params->nama_device,
+                'password'    => bcrypt($params->password),
+                'api_token'   => generate_token($params->kode_pegawai, $params->password),
+                'created_at'  => Carbon::now(),
             ]);
 
             if ($akun) {
