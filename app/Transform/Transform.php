@@ -22,7 +22,7 @@ class Transform
     {
         $dir = public_path(). DIRECTORY_SEPARATOR. "images" . DIRECTORY_SEPARATOR . "akun";
         file_put_contents($dir.DIRECTORY_SEPARATOR.($filename = $kodePegawai.".jpg"), $foto);
-        $fullPath = $dir . DIRECTORY_SEPARATOR . $filename;
+        $fullPath = url("/") . DIRECTORY_SEPARATOR . "images". DIRECTORY_SEPARATOR. "akun" . DIRECTORY_SEPARATOR. $filename;
         return $fullPath;
     }
 }
