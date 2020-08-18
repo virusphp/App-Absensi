@@ -35,7 +35,7 @@ class AbsenController extends Controller
         }
 
         $absen = $this->absen->simpan($r);
-        dd($absen);
+        // dd($absen);
         
         if (!$absen) {
             return response()->jsonError(false, "Terjadi Kesalhan", "Type data yang di insert tidak sesuai");
