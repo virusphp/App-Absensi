@@ -19,12 +19,15 @@ class TransformAkun
 
     public function mapperFirst($table)
     {
-       
-        $nama = [
-            'gelar_depan' => $table->gelar_depan,
-            'nama_pegawai' => $table->nama_pegawai,
-            'gelar_belakang' => $table->gelar_belakang,
-        ];
+        if ($table->gelar_depan == "-" && $table->gelar_belakang == "-") {
+            $nama = $table->nama_pegawai;
+        } else if($table->gelar_depan == "-") {
+            $nama = $table->nama_pegawai. " ". $table->gelar_belakang;
+        } else if($table->gelar_belakang == "-") {
+            $nama = $table->gelar_depan. " ". $table->nama_pegawai;
+        } else {
+            $nama = $table->gelar_depan. " ". $table->nama_pegawai. " " . $table->gelar_belakang;
+        }
 
         $unit = [
             'kode_unit' => $table->kd_sub_unit,
@@ -34,15 +37,11 @@ class TransformAkun
         $data["akun"] = [
                 'mac_address'    => $table->mac_address,
                 'kode_pegawai'   => $table->kd_pegawai,
-                'nama' => $nama,
-                // 'nama_pegawai'   => $table->nama_pegawai,
-                // 'gelar_depan'    => $table->gelar_depan,
-                // 'gelar_belakang' => $table->gelar_belakang,
+                'nama_pegawai' => $nama,
                 'unit'           => $unit,
                 'created_at'     => $table->created_at,
                 'updated_at'     => $table->updated_at,
         ];
-      
 
         $data["api_token"] = $table->api_token;
 
