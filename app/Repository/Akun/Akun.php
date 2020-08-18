@@ -34,7 +34,7 @@ class Akun
         return DB::connection('sqlsrv_sms')
             ->table('akun as a')
             ->select('a.kd_pegawai','a.mac_address', 'device', 'a.status_update','a.created_at','a.updated_at',
-                    'a.api_token','p.nama_pegawai','p.gelar_depan','p.gelar_belakang','su.kd_sub_unit',
+                    'a.api_token','p.nama_pegawai','p.gelar_depan','p.gelar_belakang', 'p.tempat_lahir','tgl_lahir','su.kd_sub_unit',
                     'su.nama_sub_unit', 'foto')
             ->join('dbsimrs.dbo.pegawai as p', 'a.kd_pegawai','=', 'p.kd_pegawai')
             ->join('dbsimrs.dbo.sub_unit as su', 'p.kd_sub_unit','=', 'su.kd_sub_unit')

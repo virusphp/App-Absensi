@@ -43,7 +43,7 @@ class LoginController extends Controller
         
         $akun =  $this->akun->getProfil($data["kd_pegawai"]);
         // dd($akun);
-        $transform = $this->transform->mapperFirst($akun);
+        $transform = $this->transform->mapperLogin($akun);
 
         return response()->jsonSuccess(200, "Login Sukses!", $transform);
     }

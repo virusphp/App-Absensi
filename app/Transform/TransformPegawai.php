@@ -30,12 +30,14 @@ class TransformPegawai extends Transform
         ];
 
         $data["akun"] = [
-                'mac_address'  => $table->mac_address,
-                'nama_device'  => $table->device,
-                'kode_pegawai' => $table->kd_pegawai,
-                'nama_pegawai' => $nama,
-                'unit'         => $unit,
-                'created_at'   => $table->created_at,
+                'mac_address'   => $table->mac_address,
+                'nama_device'   => $table->device,
+                'kode_pegawai'  => $table->kd_pegawai,
+                'nama_pegawai'  => $nama,
+                'unit'          => $unit,
+                'tempat_lahir'  => $table->tempat_lahir,
+                'tanggal_lahir' => $table->tgl_lahir,
+                'created_at'    => $table->created_at,
                 'updated_at'   => $table->updated_at,
         ];
 

@@ -4,24 +4,10 @@ namespace App\Transform;
 
 class TransformAkun extends Transform
 {
-    public function mapperLogin($table)
-    {
-        $data["akun"] = [
-                'kode_pegawai'   => $table->kd_pegawai,
-                'created_at'     => $table->created_at,
-                'updated_at'     => $table->updated_at,
-        ];
-
-        $data["api_token"] = $table->api_token;
-
-        return $data;
-    }
 
     public function mapperFirst($table)
     {
-        // dd($table);
         $nama = $this->getNama($table);
-        // $foto = $this->getFoto($table->kd_pegawai, $table->foto);
 
         $unit = [
             'kode_unit' => $table->kd_sub_unit,
@@ -34,7 +20,32 @@ class TransformAkun extends Transform
                 'kode_pegawai' => $table->kd_pegawai,
                 'nama_pegawai' => $nama,
                 'unit'         => $unit,
-                // 'foto'         => $foto,
+                'created_at'   => $table->created_at,
+                'updated_at'   => $table->updated_at,
+        ];
+
+        $data["api_token"] = $table->api_token;
+
+        return $data;
+    }
+
+    public function mapperLogin($table)
+    {
+        $nama = $this->getNama($table);
+        $foto = $this->getFoto($table->kd_pegawai, $table->foto);
+
+        $unit = [
+            'kode_unit' => $table->kd_sub_unit,
+            'nama_unit' => $table->nama_sub_unit
+        ];
+
+        $data["akun"] = [
+                'mac_address'  => $table->mac_address,
+                'nama_device'  => $table->device,
+                'kode_pegawai' => $table->kd_pegawai,
+                'nama_pegawai' => $nama,
+                'unit'         => $unit,
+                'foto'         => $foto,
                 'created_at'   => $table->created_at,
                 'updated_at'   => $table->updated_at,
         ];
