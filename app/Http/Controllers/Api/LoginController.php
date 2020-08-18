@@ -26,18 +26,24 @@ class LoginController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(false, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Ada Kesalahan", $message);
+        }
+
+        $verifMac = $this->akun->verifMac($r->mac_address);
+
+        if(!$verifMac) {
+            return response()->jsonError(403, "Terjadi Kesalahan!", "Smartphone yang di gunakan tidak sesuai dengan smartphon terdaftar!!");
         }
 
         $data = ["kd_pegawai" => $r->username, "password" => $r->password];
 
-        if (Auth::guard("akun")->attempt($data)) {
-            $akun =  $this->akun->getProfil($data["kd_pegawai"]);
-            $transform = $this->transform->mapperFirst($akun);
-
-            return response()->jsonSuccess(true, "Login Sukses!", $transform);
+        if (!Auth::guard("akun")->attempt($data)) {
+            return response()->jsonError(403, "Terjadi Kesalahan!", "Username atau password salah! tidak di izinkan");
         }
+        
+        $akun =  $this->akun->getProfil($data["kd_pegawai"]);
+        $transform = $this->transform->mapperFirst($akun);
 
-        return response()->jsonError(false, "Terjadi Error Server", "Error code 500");
+        return response()->jsonSuccess(200, "Login Sukses!", $transform);
     }
 }

@@ -24,9 +24,9 @@ class ResponseServiceProvider extends ServiceProvider
      */
     public function boot(ResponseFactory $factory)
     {
-        $factory->macro('jsonSuccess', function($ok = true, $message = '', $data = null) use ($factory) {
+        $factory->macro('jsonSuccess', function($code = 200, $message = '', $data = null) use ($factory) {
             $format = [
-                'ok' => $ok,
+                'code' => $code,
                 'message' => $message,
                 'result' => $data
             ];
@@ -34,24 +34,25 @@ class ResponseServiceProvider extends ServiceProvider
             return $factory->make($format);
         });
 
-        $factory->macro('success', function($ok = true, $message = '', $data = null) use ($factory) {
+        $factory->macro('jsonError', function($code = 200, $message = '', $errors = []) use ($factory) {
             $format = [
-                'ok' => $ok,
-                'message' => $message,
-                'result' => $data
-            ];
-
-            return $factory->make($format);
-        });
-
-        $factory->macro('jsonError', function($ok = true, $message = '', $errors = []) use ($factory) {
-            $format = [
-                'ok' => $ok,
+                'code' => $code,
                 'message' => $message,
                 'errors' => $errors
             ];
 
             return $factory->make($format);
         });
+
+        $factory->macro('success', function($code = 200, $message = '', $data = null) use ($factory) {
+            $format = [
+                'code' => $code,
+                'message' => $message,
+                'result' => $data
+            ];
+
+            return $factory->make($format);
+        });
+
     }
 }

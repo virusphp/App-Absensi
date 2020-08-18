@@ -24,11 +24,11 @@ class PegawaiController extends Controller
         $data   = $this->pegawai->getPegawai();
 
         if(!$data) {
-            return response()->jsonError(false, "Data tidak ditemukan!", $data);
+            return response()->jsonError(201, "Data tidak ditemukan!", $data);
         }
 
         $transform = $this->transform->mapperAll($data);
-        return response()->jsonSuccess(true, "Data Ditemukan", $transform);
+        return response()->jsonSuccess(200, "Data Ditemukan", $transform);
     }
 
     public function getPegawaiDetail($kodaPegawai)
@@ -36,10 +36,10 @@ class PegawaiController extends Controller
         $data = $this->pegawai->getPegawaiDetail($kodaPegawai);
 
         if(!$data) {
-            return response()->jsonError(false, "Data tidak ditemukan!", $data);
+            return response()->jsonError(201, "Data tidak ditemukan!", $data);
         }
 
         $transform = $this->transform->mapperFirst($data);
-        return response()->jsonSuccess(true, "Data Ditemukan", $transform);
+        return response()->jsonSuccess(200, "Data Ditemukan", $transform);
     }
 }

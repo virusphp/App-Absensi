@@ -23,19 +23,19 @@ class LoginPlatformController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(false, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Ada Kesalahan", $message);
         }
 
         $data = ["username" => $r->username, "password" => $r->password];
 
         if (!Auth::guard("access")->attempt($data)) {
-            return response()->jsonError(false, "Terjadi Kesalahan!", "Username atau password salah!");
+            return response()->jsonError(403, "Terjadi Kesalahan!", "Username atau password salah! tidak di izinkan");
         }
 
         $akun =  $this->access->getProfil($data["username"]);
         $transform = $this->transform->mapperFirst($akun);
 
-        return response()->jsonSuccess(true, "Login Sukses!", $transform);
+        return response()->jsonSuccess(200, "Login Sukses!", $transform);
 
     }
 }

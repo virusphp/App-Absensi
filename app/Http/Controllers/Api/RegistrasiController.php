@@ -27,7 +27,7 @@ class RegistrasiController extends ApiController
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(false, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Ada Kesalahan", $message);
         }
 
         // $verified = $this->akun->verif($r);
@@ -39,10 +39,10 @@ class RegistrasiController extends ApiController
 
         if ($akun) {
             $transform = $this->transform->mapperFirst($akun);
-            return response()->jsonSuccess(true, "Registrasi Sukses!", $transform);
+            return response()->jsonSuccess(200, "Registrasi Sukses!", $transform);
         }
 
-        return response()->jsonError(false, "Terjadi Error Server", "Error code 500");
+        return response()->jsonError(500, "Terjadi Error Server", "Internal sever error");
     }
 
     public function verified(Request $r, VerifValidation $valid)
@@ -51,16 +51,16 @@ class RegistrasiController extends ApiController
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(false, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Ada Kesalahan", $message);
         }
         $verified = $this->akun->verif($r);
         // dd($verified);
         if (!$verified) {
-            return response()->jsonError(false, "Ada Kesalahan Verifikasi data", ["Tempat lahir | Tanggal Lahir tidak sesuai","Silahkan menghubungi kepegawaian!"]);
+            return response()->jsonError(201, "Ada Kesalahan Verifikasi data", "Tempat lahir dan Tanggal Lahir tidak sesuai, Silahkan menghubungi kepegawaian!");
         }
 
         $transform = $this->transform->mapperVerif($verified);
         // dd($transform);
-        return response()->jsonSuccess(true, "Data Valid", $transform);
+        return response()->jsonSuccess(200, "Data Valid", $transform);
     }
 }
