@@ -27,7 +27,7 @@ class RegistrasiController extends ApiController
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Error Require Form", $message);
         }
 
         // $verified = $this->akun->verif($r);
@@ -52,12 +52,15 @@ class RegistrasiController extends ApiController
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Error Require Form", $message);
         }
         $verified = $this->akun->verif($r);
         // dd($verified);
         if (!$verified) {
-            return response()->jsonError(201, "Ada Kesalahan Verifikasi data", "Sub Unit dan Tanggal Lahir tidak sesuai, Silahkan menghubungi kepegawaian!");
+            $verified = [
+                "messageError" => "Sub Unit dan Tanggal Lahir tidak sesuai, Silahkan menghubungi kepegawaian!"
+            ];
+            return response()->jsonError(201, "Ada Kesalahan Verifikasi data", $verified);
         }
 
         $transform = $this->transform->mapperVerif($verified);

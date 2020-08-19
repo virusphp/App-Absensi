@@ -26,19 +26,25 @@ class LoginController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Error Require Form", $message);
         }
 
         $verifMac = $this->akun->verifMac($r->mac_address);
 
         if(!$verifMac) {
-            return response()->jsonError(403, "Terjadi Kesalahan!", "Smartphone yang di gunakan tidak sesuai dengan smartphon terdaftar!!");
+            $message = [
+                "messageError" => "Smartphone yang di gunakan tidak sesuai dengan smartphon terdaftar!!"
+            ];
+            return response()->jsonError(403, "Terjadi Kesalahan!", $message);
         }
 
         $data = ["kd_pegawai" => $r->username, "password" => $r->password];
 
         if (!Auth::guard("akun")->attempt($data)) {
-            return response()->jsonError(403, "Terjadi Kesalahan!", "Username atau password salah! tidak di izinkan");
+            $message = [
+                "messageError" => "Username atau password salah! tidak di izinkan"
+            ];
+            return response()->jsonError(403, "Terjadi Kesalahan!", $message);
         }
         
         $akun =  $this->akun->getProfil($data["kd_pegawai"]);

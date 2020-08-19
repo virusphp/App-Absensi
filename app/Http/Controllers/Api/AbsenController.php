@@ -26,14 +26,17 @@ class AbsenController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Error Require Form", $message);
         }
         
         $absen = $this->absen->getDaftarAbsen($r);
         // dd($absen);
 
         if (!$absen) {
-            return response()->jsonError(201, "Terjadi Kesalhan", "Data Absen pada bulan ini belum ada");
+            $message = [
+                "messageError" => "Smartphone yang di gunakan tidak sesuai dengan smartphon terdaftar!!"
+            ];
+            return response()->jsonError(201, "Terjadi Kesalhan", $message);
         }
 
         $transform = $this->transform->mapperDaftar($absen);
@@ -47,19 +50,25 @@ class AbsenController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Ada Kesalahan", $message);
+            return response()->jsonError(422, "Error Require Form", $message);
         }
         
         $absen = $this->absen->cekAbsen($r);
 
         if ($absen) {
-            return response()->jsonError(403, "Sudah Absen!!", "Sudah pernah absen ".absensi($r->status_absen)); 
+            $message = [
+                "messageError" => "Sudah pernah absen ".absensi($r->status_absen)
+            ];
+            return response()->jsonError(403, "Sudah Absen!!", $message); 
         }
 
         $absen = $this->absen->simpan($r);
         
         if (!$absen) {
-            return response()->jsonError(201, "Terjadi Kesalhan", "Type data yang di insert tidak sesuai");
+            $message = [
+                "messageError" => "Type data yang di insert tidak sesuai"
+            ];
+            return response()->jsonError(201, "Terjadi Kesalhan", $message);
         }
 
         $transform = $this->transform->mapperFirst($absen);
