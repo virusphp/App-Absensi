@@ -14,3 +14,14 @@ function absensi($status)
 {
     return $status == 0 ? "Masuk" : "Keluar";
 }
+
+function tanggal($nilai)
+{
+    return date('Y-m-d', strtotime($nilai));
+}
+
+function waktu($nilai)
+{
+    return date('H:i:s', strtotime($nilai));
+}
+

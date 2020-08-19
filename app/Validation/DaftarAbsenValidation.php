@@ -3,14 +3,13 @@
 namespace App\Validation;
 use Validator;
 
-class AbsenValidation
+class DaftarAbsenValidation
 {
     public function rules($request)
     {
         return Validator::make($request->all(), [
             'kode_pegawai' => 'required',
-            'status_absen' => 'required|max:1',
-            'kd_sub_unit' => 'required',
+            'bulan' => 'required',
         ]);
     }
 

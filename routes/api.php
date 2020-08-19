@@ -26,7 +26,8 @@ Route::group(['namespace' => 'Api'], function() {
         Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
 
         Route::group(["middleware" => ["cors:api",]], function() {
-            Route::post('/absen', 'AbsenController@absen')->name('absen');
+            Route::post('/absen', 'AbsenController@postAbsen')->name('absen');
+            Route::post('/daftar/absen', 'AbsenController@postDaftarAbsen')->name('daftar.absen');
         });
     });
 });

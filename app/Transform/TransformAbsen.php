@@ -13,4 +13,17 @@ class TransformAbsen
         return $data;
     }
 
+    public function mapperDaftar($table)
+    {
+        foreach ($table as $value) {
+            $data["absen"][] = [
+                'tanggal'   => tanggal($value->tanggal),
+                'jam'   => waktu($value->tanggal),
+                'status_absen'    => absensi($value->status_absen),
+                'nama_unit' => $value->nama_sub_unit,
+            ];
+        }
+        return $data;
+    }
+
 }
