@@ -40,14 +40,17 @@ class Absen
         )
         ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
         ->whereMonth('a.tanggal', $params->bulan)
+        ->whereYear('a.tanggal', $params->tahun)
         ->where('a.kd_pegawai', $params->kode_pegawai)
         ->get();
     }
 
     public function cekAbsen($params)
     {
-        return DB::table('absensi')->where([
-            ['tanggal', $params->tanggal],
+        $now = Carbon::now();
+        return DB::table('absensi')
+        ->whereDate('tanggal', $now)
+        ->where([
             ['kd_pegawai', $params->kode_pegawai],
             ['status_absen', $params->status_absen]
         ])->first();

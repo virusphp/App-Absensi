@@ -54,6 +54,7 @@ class AbsenController extends Controller
         }
         
         $absen = $this->absen->cekAbsen($r);
+        // dd($absen);
 
         if ($absen) {
             $message = [

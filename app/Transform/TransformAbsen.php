@@ -16,7 +16,7 @@ class TransformAbsen
     public function mapperDaftar($table)
     {
         foreach ($table as $value) {
-            $data["absen"][] = [
+            $data["list_absen"][] = [
                 'tanggal'   => tanggal($value->tanggal),
                 'jam'   => waktu($value->tanggal),
                 'status_absen'    => absensi($value->status_absen),
