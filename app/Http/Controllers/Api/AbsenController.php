@@ -75,4 +75,36 @@ class AbsenController extends Controller
         $transform = $this->transform->mapperFirst($absen);
         return response()->jsonSuccess(200, "Berhasil di simpan!", $transform);
     }
+
+    public function reAbsen(Request $r, AbsenValidation $valid)
+    {
+        $validate = $valid->rules($r);
+
+        if ($validate->fails()) {
+            $message = $valid->messages($validate->errors());
+            return response()->jsonError(422, "Error Require Form", $message);
+        }
+        
+        // $absen = $this->absen->cekAbsen($r);
+        // dd($absen);
+
+        // if ($absen) {
+        //     $message = [
+        //         "messageError" => "Sudah pernah absen ".absensi($r->status_absen)
+        //     ];
+        //     return response()->jsonError(403, "Sudah Absen!!", $message); 
+        // }
+
+        $absen = $this->absen->simpan($r);
+        
+        if (!$absen) {
+            $message = [
+                "messageError" => "Type data yang di insert tidak sesuai"
+            ];
+            return response()->jsonError(201, "Terjadi Kesalhan", $message);
+        }
+
+        $transform = $this->transform->mapperFirst($absen);
+        return response()->jsonSuccess(200, "Berhasil di simpan!", $transform);
+    }
 }

@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Api'], function() {
 
         Route::group(["middleware" => ["cors:api",]], function() {
             Route::post('/absen', 'AbsenController@postAbsen')->name('absen');
+            Route::post('/absen/ulang', 'AbsenController@reAbsen')->name('absen');
             Route::post('/daftar/absen', 'AbsenController@postDaftarAbsen')->name('daftar.absen');
         });
     });
