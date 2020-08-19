@@ -2,7 +2,7 @@
 
 namespace App\Repository\Absen;
 use Carbon\Carbon;
-use Exception;
+use League\Flysystem\Exception;
 use Illuminate\Support\Facades\DB;
 
 class Absen
@@ -22,6 +22,8 @@ class Absen
                     ->select('tanggal','status_absen')
                     ->where('kd_pegawai', $params->kode_pegawai)
                     ->first();
+                    
+                return $absen;
             }
             
             throw Exception(["ok" => false, "message" => "Error inserting data", "result" => "none"]);
