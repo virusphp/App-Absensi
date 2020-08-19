@@ -30,11 +30,11 @@ class AbsenController extends Controller
         }
         
         $absen = $this->absen->getDaftarAbsen($r);
-        // dd($absen);
+        // dd($absen->count() === 0);
 
-        if (!$absen) {
+        if ($absen->count() === 0) {
             $message = [
-                "messageError" => "Smartphone yang di gunakan tidak sesuai dengan smartphon terdaftar!!"
+                "messageError" => "Tahun atau bulan yang di pilih tidak sesuai!!"
             ];
             return response()->jsonError(201, "Terjadi Kesalhan", $message);
         }
