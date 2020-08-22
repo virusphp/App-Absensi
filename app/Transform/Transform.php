@@ -22,9 +22,22 @@ class Transform
 
     protected function getFoto($kodePegawai, $foto)
     {
+        $wid = 50;
+        $hig = 80;
+
         $dir = public_path(). DIRECTORY_SEPARATOR. "images" . DIRECTORY_SEPARATOR . "akun";
         file_put_contents($dir.DIRECTORY_SEPARATOR.($filename = $kodePegawai.".jpg"), $foto);
-        Image::make(file_put_contents($dir.DIRECTORY_SEPARATOR.($filename = $kodePegawai.".jpg"), $foto))->resize(200,300);
+
+        $canvas = Image::canvas($wid, $hig);
+
+        $image = Image::make($dir.DIRECTORY_SEPARATOR.$kodePegawai.".jpg")->resize($wid, $hig, function($constraint){
+            $constraint->aspectRatio();
+        });
+
+        $canvas->insert($image, "center");
+
+        $canvas->save($dir. \DIRECTORY_SEPARATOR. $kodePegawai. ".jpg");
+       
         $fullPath = url("/") . DIRECTORY_SEPARATOR . "images". DIRECTORY_SEPARATOR. "akun" . DIRECTORY_SEPARATOR. $filename;
         
         return $fullPath;

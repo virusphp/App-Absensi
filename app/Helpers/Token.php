@@ -12,7 +12,7 @@ function generate_token($kode, $password)
 
 function absensi($status)
 {
-    return $status == 1 ? "Masuk" : $status == 2 ?  "Keluar" : '';
+    return $status == 1 ? "Masuk" : "Keluar" ;
 }
 
 function tanggal($nilai)
