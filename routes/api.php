@@ -22,7 +22,8 @@ Route::group(['namespace' => 'Api'], function() {
         Route::post('/pegawai/verif', "RegistrasiController@verified");
         Route::post('/register', 'RegistrasiController@register')->name('register');
         Route::post('/login', 'LoginController@login')->name('login');
-        Route::post('/edit/smartphone', 'UpdateSmartphoneController@checkLogin')->name('checkLogin');
+        Route::post('/edit/smartphone', 'UpdateSmartphoneController@editSmartphone')->name('edit.smartphone');
+        Route::post('/update/smartphone', 'UpdateSmartphoneController@updateSmartphone')->name('update.smartphone');
         Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
         Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
 

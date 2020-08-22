@@ -19,7 +19,7 @@ class UpdateSmartphoneController extends ApiController
         $this->transform = new TransformAkun();
     }
 
-    public function checkLogin(Request $r, LoginValidation $valid)
+    public function editSmartphone(Request $r, LoginValidation $valid)
     {
         $validate = $valid->rules($r);
 
