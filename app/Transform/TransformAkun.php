@@ -40,14 +40,16 @@ class TransformAkun extends Transform
         ];
 
         $data["akun"] = [
-                'mac_address'  => $table->mac_address,
-                'nama_device'  => $table->device,
-                'kode_pegawai' => $table->kd_pegawai,
-                'nama_pegawai' => $nama,
-                'unit'         => $unit,
-                'foto'         => $foto,
-                'created_at'   => $table->created_at,
-                'updated_at'   => $table->updated_at,
+                'mac_address'   => $table->mac_address,
+                'nama_device'   => $table->device,
+                'kode_pegawai'  => $table->kd_pegawai,
+                'nama_pegawai'  => $nama,
+                'tempat_lahir'  => $table->tempat_lahir,
+                'tanggal_lahir' => tanggal($table->tgl_lahir),
+                'unit'          => $unit,
+                'foto'          => $foto,
+                'created_at'    => $table->created_at,
+                'updated_at'    => $table->updated_at,
         ];
 
         $data["api_token"] = $table->api_token;
