@@ -2,6 +2,8 @@
 
 namespace App\Transform;
 
+use Image;
+
 class Transform
 {
     public function getNama($table)
@@ -22,7 +24,9 @@ class Transform
     {
         $dir = public_path(). DIRECTORY_SEPARATOR. "images" . DIRECTORY_SEPARATOR . "akun";
         file_put_contents($dir.DIRECTORY_SEPARATOR.($filename = $kodePegawai.".jpg"), $foto);
+        Image::make(file_put_contents($dir.DIRECTORY_SEPARATOR.($filename = $kodePegawai.".jpg"), $foto))->resize(200,300);
         $fullPath = url("/") . DIRECTORY_SEPARATOR . "images". DIRECTORY_SEPARATOR. "akun" . DIRECTORY_SEPARATOR. $filename;
+        
         return $fullPath;
     }
 }

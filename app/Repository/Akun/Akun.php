@@ -22,10 +22,13 @@ class Akun
         ->first();
     }
 
-    public function verifMac($mac)
+    public function verifMac($params)
     {
         return DB::table('akun')->select('mac_address')
-            ->where('mac_address',$mac)
+            ->where([
+                ['mac_address',$params->mac_address],
+                ['kd_pegawai',$params->username],
+            ])
             ->first();
     }
 

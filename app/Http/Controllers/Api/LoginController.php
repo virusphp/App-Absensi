@@ -29,7 +29,7 @@ class LoginController extends Controller
             return response()->jsonError(422, "Error Require Form", $message);
         }
 
-        $verifMac = $this->akun->verifMac($r->mac_address);
+        $verifMac = $this->akun->verifMac($r);
 
         if(!$verifMac) {
             $message = [
