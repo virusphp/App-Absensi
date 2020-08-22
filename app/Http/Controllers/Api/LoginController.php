@@ -32,8 +32,9 @@ class LoginController extends Controller
         $verifMac = $this->akun->verifMac($r);
 
         if(!$verifMac) {
+            $getPhone = $this->akun->getPhone($r);
             $message = [
-                "messageError" => "Smartphone yang di gunakan tidak sesuai dengan smartphon terdaftar!!"
+                "messageError" => "Smartphone tidak sesuai dengan smartphon terdaftar!! ($getPhone->device)"
             ];
             return response()->jsonError(403, "Terjadi Kesalahan!", $message);
         }

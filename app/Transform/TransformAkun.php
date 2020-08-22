@@ -57,6 +57,31 @@ class TransformAkun extends Transform
         return $data;
     }
 
+    public function mapperEditSmartphone($table)
+    {
+        $nama = $this->getNama($table);
+        $foto = $this->getFoto($table->kd_pegawai, $table->foto);
+
+        $unit = [
+            'kode_unit' => $table->kd_sub_unit,
+            'nama_unit' => $table->nama_sub_unit
+        ];
+
+        $data["akun"] = [
+                'mac_address_lama'   => $table->mac_address,
+                'nama_device_lama'   => $table->device,
+                'kode_pegawai'  => $table->kd_pegawai,
+                'nama_pegawai'  => $nama,
+                'tempat_lahir'  => $table->tempat_lahir,
+                'created_at'    => $table->created_at,
+                'updated_at'    => $table->updated_at,
+        ];
+
+        $data["api_token"] = $table->api_token;
+
+        return $data;
+    }
+
     public function mapperVerif($table)
     {
         $data["pegawai"] = [
