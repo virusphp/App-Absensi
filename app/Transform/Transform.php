@@ -22,8 +22,8 @@ class Transform
 
     protected function getFoto($kodePegawai, $foto)
     {
-        $wid = 50;
-        $hig = 80;
+        $wid = 472;
+        $hig = 709;
 
         $dir = public_path(). DIRECTORY_SEPARATOR. "images" . DIRECTORY_SEPARATOR . "akun";
         file_put_contents($dir.DIRECTORY_SEPARATOR.($filename = $kodePegawai.".jpg"), $foto);
