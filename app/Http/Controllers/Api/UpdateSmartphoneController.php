@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Validation\LoginValidation;
+use App\Validation\UpdateValidation;
 use Illuminate\Http\Request;
 use Auth;
 use App\Repository\Akun\Akun;
