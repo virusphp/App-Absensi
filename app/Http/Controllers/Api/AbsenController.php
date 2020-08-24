@@ -34,7 +34,7 @@ class AbsenController extends Controller
 
         if ($absen->count() === 0) {
             $message = [
-                "messageError" => "Tahun atau bulan yang di pilih tidak sesuai!!"
+                "messageError" => "Belum ada absen pada bulan tersebut!!"
             ];
             return response()->jsonError(201, "Terjadi Kesalhan", $message);
         }

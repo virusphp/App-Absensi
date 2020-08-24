@@ -8,7 +8,7 @@ class UpdateValidation
     public function rules($request)
     {
         return Validator::make($request->all(), [
-            'kode_pegawai' => 'required|min:5|unique:akun,kd_pegawai',
+            'kode_pegawai' => 'required|min:5',
             'mac_address_lama' => 'required',
             'mac_address_baru' => 'required',
             'nama_device_lama' => 'required',
