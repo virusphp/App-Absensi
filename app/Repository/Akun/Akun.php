@@ -102,7 +102,7 @@ class Akun
             $akun =  DB::table('akun')
             ->where([
                 ['kd_pegawai', $params->kode_pegawai],
-                ['mac_address_lama', $params->mac_address_lama],
+                ['mac_address', $params->mac_address_lama],
             ])
             ->update([
                 'mac_address'   => $params->mac_address_baru,
