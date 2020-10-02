@@ -20,8 +20,8 @@ Route::group(['namespace' => 'Api'], function() {
 
     Route::group(['middleware' => ['signature:api']], function (){
         Route::post('/pegawai/verif', "RegistrasiController@verified");
-        Route::post('/register', 'RegistrasiController@register')->name('register');
-        Route::post('/login', 'LoginController@login')->name('login');
+        Route::post('/register', 'RegistrasiController@register')->name('register.api');
+        Route::post('/login', 'LoginController@login')->name('login.api');
         Route::post('/edit/smartphone', 'UpdateSmartphoneController@editSmartphone')->name('edit.smartphone');
         Route::post('/update/smartphone', 'UpdateSmartphoneController@updateSmartphone')->name('update.smartphone');
         Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');

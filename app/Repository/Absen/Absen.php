@@ -12,14 +12,16 @@ class Absen
         try {
             $absen =  DB::table('absensi')->insert([
                 'kd_pegawai'   => $params->kode_pegawai,
-                'tanggal'      => Carbon::now(),
+                'tanggal'      => Carbon::now()->toDateString(),
+                'jam'          => Carbon::now()->toTimeString(),
                 'status_absen' => $params->status_absen,
                 'kd_sub_unit'  => $params->kd_sub_unit,
+                'created_at '  => Carbon::now()
             ]);
 
             if ($absen) {
               $absen = DB::table('absensi')
-                    ->select('tanggal','status_absen')
+                    ->select('tanggal', 'jam', 'status_absen')
                     ->where('kd_pegawai', $params->kode_pegawai)
                     ->first();
                     
@@ -36,7 +38,7 @@ class Absen
     public function getDaftarAbsen($params)
     {
         return DB::table('absensi as a')->select(
-            'a.tanggal', 'a.status_absen', 'su.nama_sub_unit'
+            'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit'
         )
         ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
         ->whereMonth('a.tanggal', $params->bulan)

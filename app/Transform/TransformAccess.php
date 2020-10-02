@@ -7,12 +7,12 @@ class TransformAccess
     public function mapperLogin($table)
     {
         $data["access"] = [
-                'nama'   => $table->nama,
+                'nama'       => $table->nama,
                 'username'   => $table->username,
-                'email'   => $table->email,
-                'phone'   => $table->phone,
-                'created_at'     => $table->created_at,
-                'updated_at'     => $table->updated_at,
+                'email'      => $table->email,
+                'phone'      => $table->phone,
+                'created_at' => $table->created_at,
+                'updated_at' => $table->updated_at,
         ];
 
         $data["api_token"] = $table->api_token;

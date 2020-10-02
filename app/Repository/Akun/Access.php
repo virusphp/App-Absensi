@@ -30,7 +30,6 @@ class Access
                 'created_at' => Carbon::now(),
             ]);
 
-
             if (!$akun) {
               return responst()->jsonError(false, "Error Transaction", "error proses insert data"); 
             }
