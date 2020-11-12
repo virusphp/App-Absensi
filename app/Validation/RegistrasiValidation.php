@@ -14,6 +14,11 @@ class RegistrasiValidation
             'tanggal_lahir' => 'required',
             'password' => 'required|min:6',
             'repassword' => 'required|same:password|min:6'
+        ],[
+            'required' => 'Tidak boleh kosong!!',
+            'unique' => 'Device yang di pakai tidak boleh sama!!', 
+            'min' => 'Minimal harus 6 digit!!', 
+            'same' => 'Harus sama dengan password!!', 
         ]);
     }
 
@@ -22,7 +27,7 @@ class RegistrasiValidation
         $error = [];
         foreach($errors->getMessages() as $key => $value)
         {
-                $error[$key] = $value[0]; 
+                $error[] = $key. ' '. $value[0]; 
         }
         // dd($error);
         return $error;

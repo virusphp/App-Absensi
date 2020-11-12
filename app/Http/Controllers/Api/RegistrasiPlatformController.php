@@ -24,7 +24,7 @@ class RegistrasiPlatformController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Error Require Form", $message);
+            return response()->jsonError(422, implode(",", $message), $message);
         }
 
         $akun = $this->access->simpan($r);

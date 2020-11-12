@@ -27,7 +27,7 @@ class RegistrasiController extends ApiController
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Error Require Form", $message);
+            return response()->jsonError(422, implode(",",$message), $message);
         }
 
         // $verified = $this->akun->verif($r);
@@ -52,7 +52,7 @@ class RegistrasiController extends ApiController
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Error Require Form", $message);
+            return response()->jsonError(422, implode(",",$message), $message);
         }
         $verified = $this->akun->verif($r);
         // dd($verified);

@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Error Require Form", $message);
+            return response()->jsonError(422,  implode(",",$message), $message);
         }
 
         $verifMac = $this->akun->verifMac($r);
@@ -36,7 +36,7 @@ class LoginController extends Controller
             $message = [
                 "messageError" => "Smartphone tidak sesuai dengan smartphon terdaftar!! ($getPhone->device)"
             ];
-            return response()->jsonError(403, "Terjadi Kesalahan!", $message);
+            return response()->jsonError(403, $message['messageError'],  $message);
         }
 
         $data = ["kd_pegawai" => $r->username, "password" => $r->password];
@@ -45,7 +45,7 @@ class LoginController extends Controller
             $message = [
                 "messageError" => "Username atau password salah! tidak di izinkan"
             ];
-            return response()->jsonError(403, "Terjadi Kesalahan!", $message);
+            return response()->jsonError(403, $message['messageError'], $message);
         }
         
         $akun =  $this->akun->getProfil($data["kd_pegawai"]);

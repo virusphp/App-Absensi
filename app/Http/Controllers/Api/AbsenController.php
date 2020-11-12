@@ -26,7 +26,7 @@ class AbsenController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Error Require Form", $message);
+            return response()->jsonError(422, implode(",", $message), $message);
         }
         
         $absen = $this->absen->getDaftarAbsen($r);
@@ -36,7 +36,7 @@ class AbsenController extends Controller
             $message = [
                 "messageError" => "Belum ada absen pada bulan tersebut!!"
             ];
-            return response()->jsonError(201, "Terjadi Kesalhan", $message);
+            return response()->jsonError(201, $message['messageError'], $message);
         }
 
         $transform = $this->transform->mapperDaftar($absen);
@@ -50,7 +50,7 @@ class AbsenController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Error Require Form", $message);
+            return response()->jsonError(422, implode(",", $message), $message);
         }
         
         $absen = $this->absen->cekAbsen($r);
@@ -60,7 +60,7 @@ class AbsenController extends Controller
             $message = [
                 "messageError" => "Sudah pernah absen ".absensi($r->status_absen)
             ];
-            return response()->jsonError(403, "Sudah Absen!!", $message); 
+            return response()->jsonError(403, $message['messageError'], $message); 
         }
 
         $absen = $this->absen->simpan($r);
@@ -82,7 +82,7 @@ class AbsenController extends Controller
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, "Error Require Form", $message);
+            return response()->jsonError(422, implode(",", $message), $message);
         }
         
         // $absen = $this->absen->cekAbsen($r);
