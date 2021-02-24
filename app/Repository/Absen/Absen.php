@@ -22,7 +22,10 @@ class Absen
             if ($absen) {
               $absen = DB::table('absensi')
                     ->select('tanggal', 'jam', 'status_absen')
-                    ->where('kd_pegawai', $params->kode_pegawai)
+                    ->where([
+                        ['kd_pegawai', $params->kode_pegawai],
+                        ['tanggal', Carbon::now()->toDateString()],
+                    ])
                     ->first();
                     
                 return $absen;
@@ -49,7 +52,8 @@ class Absen
 
     public function cekAbsen($params)
     {
-        $now = Carbon::now();
+        $now = date('Y-m-d');
+        // dd($now);
         return DB::table('absensi')
         ->whereDate('tanggal', $now)
         ->where([
