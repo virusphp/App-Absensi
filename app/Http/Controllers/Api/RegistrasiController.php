@@ -27,7 +27,7 @@ class RegistrasiController extends ApiController
 
         if ($validate->fails()) {
             $message = $valid->messages($validate->errors());
-            return response()->jsonError(422, implode(",",$message), $message);
+            return response()->jsonError(422, implode(",",$message), ['messageError' => implode(",",$message)]);
         }
 
         // $verified = $this->akun->verif($r);
