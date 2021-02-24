@@ -42,7 +42,7 @@ class UpdateSmartphoneController extends ApiController
        
         if (!$status) {
              $message = [
-                "messageError" => "Status update anda blom di update di kepegawaian!!"
+                "messageError" => "Status update anda belum di update di kepegawaian!!"
             ];
             return response()->jsonError(403, $message['messageError'], $message);
         }
