@@ -13,6 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/tanggalserver', function(){
+    date_default_timezone_set('Asia/Jakarta');
+    $data = [
+        'tanggal' => date('Y-m-d'),
+        'waktu' => date('H:i:s')
+    ];
+    return response()->jsonSuccess(200, "OK",$data);
+});
+
 Route::group(['namespace' => 'Api'], function() {
 
     Route::post('/access/register', 'RegistrasiPlatformController@register')->name('register.acceess');
