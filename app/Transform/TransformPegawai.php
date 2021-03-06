@@ -21,8 +21,9 @@ class TransformPegawai extends Transform
 
     public function mapperFirst($table)
     {
-       
         $nama = $this->getNama($table);
+        $foto = $this->getFoto($table->kd_pegawai, $table->foto);
+
         
         $unit = [
             'kode_unit' => $table->kd_sub_unit,
@@ -34,11 +35,12 @@ class TransformPegawai extends Transform
                 'nama_device'   => $table->device,
                 'kode_pegawai'  => $table->kd_pegawai,
                 'nama_pegawai'  => $nama,
-                'unit'          => $unit,
                 'tempat_lahir'  => $table->tempat_lahir,
-                'tanggal_lahir' => $table->tgl_lahir,
+                'tanggal_lahir' => tanggal($table->tgl_lahir),
+                'unit'          => $unit,
+                'foto'          => $foto,
                 'created_at'    => $table->created_at,
-                'updated_at'   => $table->updated_at,
+                'updated_at'    => $table->updated_at,
         ];
 
         return $data;

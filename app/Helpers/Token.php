@@ -20,6 +20,11 @@ function tanggal($nilai)
     return date('Y-m-d', strtotime($nilai));
 }
 
+function generateKey($nilai)
+{
+    return $nilai == null ? "-" : $nilai;
+}
+
 function waktu($nilai)
 {
     return date('H:i:s', strtotime($nilai));

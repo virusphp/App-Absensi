@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,7 @@ Route::group(['namespace' => 'Api'], function() {
             Route::post('/absen', 'AbsenController@postAbsen')->name('absen');
             Route::post('/absen/ulang', 'AbsenController@reAbsen')->name('absen');
             Route::post('/daftar/absen', 'AbsenController@postDaftarAbsen')->name('daftar.absen');
+            Route::post('/daftar/absen/unit', 'AbsenController@postDaftarAbsenUnit')->name('daftar.absen.unit');
         });
     });
 });

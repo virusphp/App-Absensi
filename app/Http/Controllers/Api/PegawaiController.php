@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AkunResource;
+use App\Http\Resources\PegawaiCollection;
 use App\Http\Resources\PegawaiResource;
 use Illuminate\Http\Request;
 use App\Repository\Pegawai\Pegawai;
@@ -26,8 +28,9 @@ class PegawaiController extends Controller
         if(!$data) {
             return response()->jsonError(201, "Data tidak ditemukan!", $data);
         }
+        
+        $transform = new PegawaiCollection($data);
 
-        $transform = $this->transform->mapperAll($data);
         return response()->jsonSuccess(200, "Data Ditemukan", $transform);
     }
 
@@ -39,7 +42,8 @@ class PegawaiController extends Controller
             return response()->jsonError(201, "Data tidak ditemukan!", $data);
         }
 
-        $transform = $this->transform->mapperFirst($data);
+        $transform = new AkunResource($data);
+
         return response()->jsonSuccess(200, "Data Ditemukan", $transform);
     }
 }

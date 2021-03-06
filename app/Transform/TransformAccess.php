@@ -25,6 +25,7 @@ class TransformAccess
         $data["access"] = [
                 'nama'       => $table->nama,
                 'email'      => $table->email,
+                'phone'      => $table->phone,
                 'username'   => $table->username,
                 'created_at' => $table->created_at,
                 'updated_at' => $table->updated_at,

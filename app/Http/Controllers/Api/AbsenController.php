@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AbsenResource;
+use App\Http\Resources\DaftaAbsenResource;
+use App\Http\Resources\DaftarAbsenCollection;
+use App\Http\Resources\DaftarAbsenUnitCollection;
 use App\Repository\Absen\Absen;
 use App\Transform\TransformAbsen;
 use App\Validation\AbsenValidation;
@@ -39,7 +43,8 @@ class AbsenController extends Controller
             return response()->jsonError(201, $message['messageError'], $message);
         }
 
-        $transform = $this->transform->mapperDaftar($absen);
+        $transform = new DaftarAbsenCollection($absen);
+
         return response()->jsonSuccess(200, "Daftar Absen", $transform);
 
     }
@@ -57,7 +62,7 @@ class AbsenController extends Controller
 
         if ($absen) {
             $message = [
-                "messageError" => "Sudah pernah absen ".absensi($r->status_absen)
+                "messageError" => "Sudah pernah absen ".absensi($r->status_absen) . "Pukul : ".date('H:i:s', $r->jam)
             ];
             return response()->jsonError(403, $message['messageError'], $message); 
         }
@@ -71,7 +76,7 @@ class AbsenController extends Controller
             return response()->jsonError(201, "Terjadi Kesalhan", $message);
         }
 
-        $transform = $this->transform->mapperFirst($absen);
+        $transform = new AbsenResource($absen);
         return response()->jsonSuccess(200, "Berhasil di simpan!", $transform);
     }
 
@@ -83,16 +88,6 @@ class AbsenController extends Controller
             $message = $valid->messages($validate->errors());
             return response()->jsonError(422, implode(",", $message), $message);
         }
-        
-        // $absen = $this->absen->cekAbsen($r);
-        // dd($absen);
-
-        // if ($absen) {
-        //     $message = [
-        //         "messageError" => "Sudah pernah absen ".absensi($r->status_absen)
-        //     ];
-        //     return response()->jsonError(403, "Sudah Absen!!", $message); 
-        // }
 
         $absen = $this->absen->simpan($r);
         
@@ -103,7 +98,24 @@ class AbsenController extends Controller
             return response()->jsonError(201, "Terjadi Kesalhan", $message);
         }
 
-        $transform = $this->transform->mapperFirst($absen);
+        $transform = new AbsenResource($absen);
         return response()->jsonSuccess(200, "Berhasil di simpan!", $transform);
+    }
+
+
+    public function postDaftarAbsenUnit(Request $r)
+    {
+        $absen = $this->absen->getViewAbsenUnit($r);
+        // dd($absen);
+
+        if ($absen->count() === 0) {
+            $message = [
+                "messageError" => "Belum ada Unit yang absesn"
+            ];
+            return response()->jsonError(201, $message['messageError'], $message);
+        }
+
+        $transform = new DaftarAbsenUnitCollection($absen);
+        return response()->jsonSuccess(200, "Daftar Absen", $transform);
     }
 }

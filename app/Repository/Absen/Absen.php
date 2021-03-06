@@ -43,11 +43,27 @@ class Absen
         return DB::table('absensi as a')->select(
             'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit'
         )
-        ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
-        ->whereMonth('a.tanggal', $params->bulan)
-        ->whereYear('a.tanggal', $params->tahun)
-        ->where('a.kd_pegawai', $params->kode_pegawai)
-        ->get();
+            ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
+            ->whereMonth('a.tanggal', $params->bulan)
+            ->whereYear('a.tanggal', $params->tahun)
+            ->where('a.kd_pegawai', $params->kode_pegawai)
+            ->get();
+    }
+
+    public function getViewAbsenUnit($params)
+    {
+        return DB::table('absensi as a')->select(
+            'a.id', 'p.nama_pegawai', 'a.tanggal', 'a.jam', 'a.status_absen', 'a.generate_key', 'su.nama_sub_unit'
+        )
+            ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
+            ->join('dbsimrs.dbo.pegawai as p', 'a.kd_pegawai','p.kd_pegawai')
+            ->where('a.tanggal', $params->tanggal)
+            ->where(function($query) use ($params) {
+                if ($params->kode_subunit != "") {
+                    $query->where('a.kd_sub_unit', $params->kode_subunit);
+                }
+            })
+            ->get();
     }
 
     public function cekAbsen($params)

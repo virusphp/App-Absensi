@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\AkunResource;
 use App\Http\Resources\UserResource;
 use App\Repository\Akun\Akun;
 use App\Transform\TransformAkun;
@@ -39,7 +40,9 @@ class RegistrasiController extends ApiController
         // dd($akun);
 
         if ($akun) {
-            $transform = $this->transform->mapperFirst($akun);
+            // $transform = $this->transform->mapperFirst($akun);
+            $transform = new AkunResource($akun);
+
             return response()->jsonSuccess(200, "Registrasi Sukses!", $transform);
         }
 

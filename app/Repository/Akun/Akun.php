@@ -11,14 +11,15 @@ class Akun
     public function verif($params)
     {
         return DB::connection('sqlsrv_simrs')
-        ->table('pegawai')
-        ->select('kd_pegawai', 'nip','tgl_lahir',
-                'nama_pegawai','gelar_depan','gelar_belakang')
+        ->table('pegawai as p')
+        ->select('p.kd_pegawai', 'p.nip','p.tgl_lahir',
+                'p.nama_pegawai','p.gelar_depan', 'p.gelar_belakang', 'su.nama_sub_unit')
         ->where([
             ['kd_pegawai', $params->kode_pegawai],
             ['tgl_lahir', $params->tanggal_lahir],
             ['kd_sub_unit', '!=', 0]
         ])
+        ->join('sub_unit as su', 'p.kd_sub_unit','=', 'su.kd_sub_unit')
         ->first();
     }
 
@@ -83,7 +84,7 @@ class Akun
                 $akun = DB::connection('sqlsrv_sms')
                     ->table('akun as a')
                     ->select('a.kd_pegawai','a.mac_address','device','a.status_update','a.created_at','updated_at','a.api_token',
-                            'p.nama_pegawai','p.gelar_depan','p.gelar_belakang','su.kd_sub_unit','su.nama_sub_unit')
+                            'p.nama_pegawai','p.gelar_depan','p.gelar_belakang','p.foto','su.kd_sub_unit','su.nama_sub_unit')
                     ->join('dbsimrs.dbo.pegawai as p', 'a.kd_pegawai','=', 'p.kd_pegawai')
                     ->join('dbsimrs.dbo.sub_unit as su', 'p.kd_sub_unit','=', 'su.kd_sub_unit')
                     ->where('a.kd_pegawai', $params->kode_pegawai)

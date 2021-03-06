@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AkunResource;
 use App\Validation\LoginValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,8 @@ class LoginController extends Controller
         }
         
         $akun =  $this->akun->getProfil($data["kd_pegawai"]);
-        $transform = $this->transform->mapperLogin($akun);
+
+        $transform = new AkunResource($akun);
 
         return response()->jsonSuccess(200, "Login Sukses!", $transform);
     }

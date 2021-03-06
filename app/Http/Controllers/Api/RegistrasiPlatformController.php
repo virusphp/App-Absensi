@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AccessResource;
 use Illuminate\Http\Request;
 use App\Repository\Akun\Access;
 use App\Validation\RegistrasiPlatform;
@@ -30,9 +31,10 @@ class RegistrasiPlatformController extends Controller
         $akun = $this->access->simpan($r);
 
         if ($akun) {
-            $transform = $this->transform->mapperFirst($akun);
+            $transform = new AccessResource($akun);
             return response()->jsonSuccess(200, "Registrasi Sukses!", $transform);
         }
+        
         $message = [
             "messageError" => "Internal server error"
         ];
