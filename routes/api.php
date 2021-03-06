@@ -36,6 +36,7 @@ Route::group(['namespace' => 'Api'], function() {
         Route::post('/update/smartphone', 'UpdateSmartphoneController@updateSmartphone')->name('update.smartphone');
         Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
         Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
+        Route::get('/subunit', 'UnitController@getSubunit')->name('subunit.all');
 
         Route::group(["middleware" => ["cors:api",]], function() {
             Route::post('/absen', 'AbsenController@postAbsen')->name('absen');
