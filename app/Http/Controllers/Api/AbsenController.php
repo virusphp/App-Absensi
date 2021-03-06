@@ -62,7 +62,7 @@ class AbsenController extends Controller
 
         if ($absen) {
             $message = [
-                "messageError" => "Sudah pernah absen ".absensi($r->status_absen) . "Pukul : ".date('H:i:s', $r->jam)
+                "messageError" => "Sudah pernah absen ".absensi($r->status_absen) . " Pukul : ". waktu($absen->jam)
             ];
             return response()->jsonError(403, $message['messageError'], $message); 
         }

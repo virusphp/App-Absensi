@@ -15,9 +15,9 @@ class Akun
         ->select('p.kd_pegawai', 'p.nip','p.tgl_lahir',
                 'p.nama_pegawai','p.gelar_depan', 'p.gelar_belakang', 'su.nama_sub_unit')
         ->where([
-            ['kd_pegawai', $params->kode_pegawai],
-            ['tgl_lahir', $params->tanggal_lahir],
-            ['kd_sub_unit', '!=', 0]
+            ['p.kd_pegawai', $params->kode_pegawai],
+            ['p.tgl_lahir', $params->tanggal_lahir],
+            ['su.kd_sub_unit', '!=', 0]
         ])
         ->join('sub_unit as su', 'p.kd_sub_unit','=', 'su.kd_sub_unit')
         ->first();
