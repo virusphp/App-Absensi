@@ -16,6 +16,7 @@ class DaftarAbsenUnitResource extends JsonResource
     {
         return [
             'id'           => $this->id,
+            'kode_pegawai' => $this->kd_pegawai,
             'nama_pegawai' => $this->nama_pegawai,
             'tanggal'      => tanggal($this->tanggal),
             'jam'          => waktu($this->jam),
