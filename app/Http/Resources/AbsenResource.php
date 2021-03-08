@@ -18,8 +18,7 @@ class AbsenResource extends JsonResource
             'absen' => [
                 'tanggal'      => tanggal($this->tanggal),
                 'jam'          => waktu($this->jam),
-                'status_absen' => $this->status_absen,
-                'generate_key' => generateKey($this->generate_key),
+                'status_absen' => $this->status_absen
             ]
         ];
     }

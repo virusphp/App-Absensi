@@ -19,6 +19,7 @@ class DaftaAbsenResource extends JsonResource
                 'jam'          => waktu($this->jam),
                 'status_absen' => absensi($this->status_absen),
                 'nama_unit'    => $this->nama_sub_unit,
+                'generate_key' => generateKey($this->generate_key),
             ];
     }
 }

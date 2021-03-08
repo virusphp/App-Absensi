@@ -42,7 +42,7 @@ class Absen
     public function getDaftarAbsen($params)
     {
         return DB::table('absensi as a')->select(
-           'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit'
+           'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit', 'a.generate_key'
         )
             ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
             ->whereMonth('a.tanggal', $params->bulan)
