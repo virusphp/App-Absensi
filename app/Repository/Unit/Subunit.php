@@ -10,6 +10,7 @@ class Subunit
         return DB::connection('sqlsrv_simrs')->table('sub_unit')->select(
                 'kd_sub_unit','nama_sub_unit'
             )
+            ->orderBy('nama_sub_unit', 'asc')
             ->get();
     }
 }

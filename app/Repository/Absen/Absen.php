@@ -48,6 +48,7 @@ class Absen
             ->whereMonth('a.tanggal', $params->bulan)
             ->whereYear('a.tanggal', $params->tahun)
             ->where('a.kd_pegawai', $params->kode_pegawai)
+            ->orderBy('a.tanggal', 'desc')
             ->get();
     }
 
