@@ -16,6 +16,7 @@ class Absen
                 'jam'          => Carbon::now()->toTimeString(),
                 'status_absen' => $params->status_absen,
                 'kd_sub_unit'  => $params->kd_sub_unit,
+                'generate_key' => $params->generate_key,
                 'created_at '  => Carbon::now()
             ]);
 
