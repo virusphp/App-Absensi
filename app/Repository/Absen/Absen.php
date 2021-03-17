@@ -65,6 +65,7 @@ class Absen
                     $query->where('a.kd_sub_unit', $params->kode_subunit);
                 }
             })
+            ->orderBy('a.jam', 'asc')
             ->get();
     }
 
