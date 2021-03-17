@@ -31,10 +31,10 @@ class RegistrasiController extends ApiController
             return response()->jsonError(422, implode(",",$message), ['messageError' => implode(",",$message)]);
         }
 
-        // $verified = $this->akun->verif($r);
-        // if (!$verified) {
-        //     return response()->jsonError(false, "Ada Kesalahan Verifikasi data", ["Tempat lahir | Tanggal Lahir tidak sesuai","Silahkan menghubungi kepegawaian!"]);
-        // }
+        $checkData = $this->akun->getDataAkun($r);
+        if ($checkData) {
+            return response()->jsonError(false, "Akun sudah terdaftar silahkan login !!", ['messageError' => "terdaftar pada device : ".$checkData->device]);
+        }
 
         $akun = $this->akun->simpan($r);
         // dd($akun);

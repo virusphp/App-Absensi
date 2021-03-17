@@ -34,6 +34,17 @@ class Akun
             ->first();
     }
 
+    public function getDataAkun($params)
+    {
+        return DB::table('akun')->select('device')
+            ->where([
+                ['mac_address',$params->mac_address],
+                ['kd_pegawai',$params->kode_pegawai],
+                ['status_update', 0]
+            ])
+            ->first();
+    }
+
     public function getStatus($username, $status)
     {
         return DB::connection('sqlsrv_sms')

@@ -8,8 +8,8 @@ class RegistrasiValidation
     public function rules($request)
     {
         return Validator::make($request->all(), [
-            'kode_pegawai' => 'required|min:5|unique:akun,kd_pegawai',
-            'mac_address' => 'required|unique:akun,mac_address',
+            // 'kode_pegawai' => 'required|min:5|unique:akun,kd_pegawai',
+            // 'mac_address' => 'required',
             'nama_device' => 'required',
             'tanggal_lahir' => 'required',
             'password' => 'required|min:6',
