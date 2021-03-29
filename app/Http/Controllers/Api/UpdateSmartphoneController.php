@@ -72,4 +72,23 @@ class UpdateSmartphoneController extends ApiController
 
         return response()->jsonError(500, "Terjadi Error Server", "Internal sever error");
     }
+
+    public function unlockDevice($user, $pass)
+    {
+        $data = ["kd_pegawai" => $user, "password" => $pass];
+        if (!Auth::guard("akun")->attempt($data)) {
+            $message = [
+                "messageError" => "Username atau password salah! tidak di izinkan"
+            ];
+            return response()->jsonError(403, $message['messageError'], $message);
+        }
+
+        $unlockUser = $this->akun->unlockUser($user);
+
+        if (!$unlockUser) {
+            return response()->jsonError(500, "Terjadi Error", "Internal server error");
+        }
+
+        return response()->jsonSuccess(200, "Berhasil unlock device!!!!!");
+    }
 }

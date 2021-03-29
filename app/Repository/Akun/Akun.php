@@ -138,4 +138,21 @@ class Akun
             return $e->getMessage();
         }
     }
+
+    public function unlockUser($user)
+    {
+        try {
+            $akun =  DB::table('akun')
+            ->where('kd_pegawai', $user)
+            ->update([
+                'status_update'   => 1,
+            ]);
+
+           
+            return $akun;
+
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }

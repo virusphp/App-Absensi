@@ -23,8 +23,10 @@ Route::get('/tanggalserver', function(){
     return response()->jsonSuccess(200, "OK",$data);
 });
 
+
 Route::group(['namespace' => 'Api'], function() {
 
+Route::get('/unlock/device/user/{user}/pass/{pass}', 'UpdateSmartphoneController@unlockDevice');
     Route::post('/access/register', 'RegistrasiPlatformController@register')->name('register.acceess');
     Route::post('/access/login', 'LoginPlatformController@login')->name('login.acceess');
 
