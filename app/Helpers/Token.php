@@ -30,3 +30,8 @@ function waktu($nilai)
     return date('H:i:s', strtotime($nilai));
 }
 
+function status($nilai)
+{
+    return $nilai == 1 ? "Aktif" : "Tidak aktif";
+}
+

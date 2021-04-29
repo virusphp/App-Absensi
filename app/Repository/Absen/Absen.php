@@ -1,14 +1,29 @@
 <?php
 
 namespace App\Repository\Absen;
+
+use App\Repository\Jadwal\Jadwal;
 use Carbon\Carbon;
 use League\Flysystem\Exception;
 use Illuminate\Support\Facades\DB;
 
 class Absen
 {
+    protected $jadwal;
+
+    public function __construct()
+    {
+        $this->jadwal = new Jadwal;
+    }
+
     public function simpan($params)
     {
+        $jadwal =  $this->jadwal->getDaftarJadwal($params);
+
+        if (!$jadwal) {
+            $jadwal->kode_shift = "-";
+        }
+
         try {
             $absen =  DB::table('absensi')->insert([
                 'kd_pegawai'   => $params->kode_pegawai,
@@ -16,6 +31,7 @@ class Absen
                 'jam'          => Carbon::now()->toTimeString(),
                 'status_absen' => $params->status_absen,
                 'kd_sub_unit'  => $params->kd_sub_unit,
+                'kode_shift'   => $jadwal->kode_shift,
                 'generate_key' => $params->generate_key,
                 'created_at '  => Carbon::now()
             ]);

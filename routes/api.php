@@ -40,11 +40,13 @@ Route::get('/unlock/device/user/{user}/pass/{pass}', 'UpdateSmartphoneController
         Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
         Route::get('/subunit', 'UnitController@getSubunit')->name('subunit.all');
 
-        Route::group(["middleware" => ["cors:api",]], function() {
+        Route::group(["middleware" => ["token:api",]], function() {
             Route::post('/absen', 'AbsenController@postAbsen')->name('absen');
             Route::post('/absen/ulang', 'AbsenController@reAbsen')->name('absen');
             Route::post('/daftar/absen', 'AbsenController@postDaftarAbsen')->name('daftar.absen');
             Route::post('/daftar/absen/unit', 'AbsenController@postDaftarAbsenUnit')->name('daftar.absen.unit');
+            Route::post('/daftar/jadwal', 'JadwalController@postDaftarJadwal')->name('daftar.jadwal');
+            Route::post('/daftar/jadwal/unit', 'JadwalController@postDaftarJadwalUnit')->name('daftar.jadwal.unit');
         });
     });
 });
