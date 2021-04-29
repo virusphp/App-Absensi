@@ -38,7 +38,7 @@ class Akun
     {
         return DB::table('akun')->select('device')
             ->where([
-                ['mac_address',$params->mac_address],
+                // ['mac_address',$params->mac_address],
                 ['kd_pegawai',$params->kode_pegawai],
                 ['status_update', 0]
             ])

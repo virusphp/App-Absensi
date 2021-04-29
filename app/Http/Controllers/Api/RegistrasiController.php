@@ -32,6 +32,7 @@ class RegistrasiController extends ApiController
         }
 
         $checkData = $this->akun->getDataAkun($r);
+        // dd($checkData);
         if ($checkData) {
             return response()->jsonError(false, "Akun sudah terdaftar silahkan login !!", ['messageError' => "terdaftar pada device : ".$checkData->device]);
         }
