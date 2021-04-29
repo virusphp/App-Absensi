@@ -35,7 +35,7 @@ class Access
             }
 
              $akun = DB::table('access')
-                    ->select('nama','username','email','api_token','created_at','updated_at')
+                    ->select('nama','username','phone','email','api_token','created_at','updated_at')
                     ->where('username', $params->username)
                     ->first();
 
