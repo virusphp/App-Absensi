@@ -23,6 +23,7 @@ class DaftaAbsenResource extends JsonResource
         }
         return [
                 'tanggal'       => tanggal($this->tanggal),
+                'jam'           => waktu($this->jam),
                 $key            => waktu($value),
                 'jam_berangkat' => waktu($this->jam),
                 'selisih'       => selisih($value, $this->jam),
