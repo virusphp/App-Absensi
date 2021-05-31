@@ -20,7 +20,7 @@ class DaftaAbsenResource extends JsonResource
         } else {
             $key = "jam_keluar";
             $value = $this->jam_keluar;
-        }
+        } 
         return [
                 'tanggal'       => tanggal($this->tanggal),
                 'jam'           => waktu($this->jam),

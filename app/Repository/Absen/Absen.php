@@ -60,7 +60,7 @@ class Absen
            'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit', 'a.generate_key', 'ms.jam_masuk','ms.jam_keluar'
         )
             ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
-            ->join('master_shift as ms','a.kode_shift','ms.kode_shift')
+            ->leftJoin('master_shift as ms','a.kode_shift','ms.kode_shift')
             ->whereMonth('a.tanggal', $params->bulan)
             ->whereYear('a.tanggal', $params->tahun)
             ->where('a.kd_pegawai', $params->kode_pegawai)

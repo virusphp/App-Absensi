@@ -34,6 +34,7 @@ class AbsenController extends Controller
         }
         
         $absen = $this->absen->getDaftarAbsen($r);
+        // dd($absen);
         // dd($absen->count() === 0);
 
         if ($absen->count() === 0) {

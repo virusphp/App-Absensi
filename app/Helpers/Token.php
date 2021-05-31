@@ -27,7 +27,8 @@ function generateKey($nilai)
 
 function waktu($nilai)
 {
-    return date('H:i:s', strtotime($nilai));
+    $result =  $nilai === null ? "-" : date('H:i:s', strtotime($nilai));
+    return $result;
 }
 
 function tanggalNilai($nilai)
@@ -38,9 +39,13 @@ function tanggalNilai($nilai)
 function selisih($awal, $akhir)
 {
     // Master mangkat
-    $masterJam = new DateTime($awal);
-    $absenJam = new DateTime($akhir);
-    return $absenJam->diff($masterJam)->format('%h:%i:%s');
+    if ($awal == null) {
+        return "-";
+    } else {
+        $masterJam = new DateTime($awal);
+        $absenJam = new DateTime($akhir);
+        return $absenJam->diff($masterJam)->format('%h:%i:%s');
+    }
 }
 
 function keterangan($awal, $akhir, $status)
