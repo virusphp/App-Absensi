@@ -14,12 +14,22 @@ class DaftaAbsenResource extends JsonResource
      */
     public function toArray($request)
     {
+        if ($this->status_absen == 1) {
+            $key = "jam_masuk";
+            $value = $this->jam_masuk;
+        } else {
+            $key = "jam_keluar";
+            $value = $this->jam_keluar;
+        }
         return [
-                'tanggal'     => tanggal($this->tanggal),
-                'jam'          => waktu($this->jam),
-                'status_absen' => absensi($this->status_absen),
-                'nama_unit'    => $this->nama_sub_unit,
-                'generate_key' => generateKey($this->generate_key),
-            ];
+                'tanggal'       => tanggal($this->tanggal),
+                $key            => waktu($value),
+                'jam_berangkat' => waktu($this->jam),
+                'selisih'       => selisih($value, $this->jam),
+                'keterangan'    => keterangan($value, $this->jam, $this->status_absen),
+                'status_absen'  => absensi($this->status_absen),
+                'nama_unit'     => $this->nama_sub_unit,
+                'generate_key'  => generateKey($this->generate_key),
+        ];
     }
 }

@@ -30,6 +30,35 @@ function waktu($nilai)
     return date('H:i:s', strtotime($nilai));
 }
 
+function tanggalNilai($nilai)
+{
+    return date("N", strtotime($nilai));
+}
+
+function selisih($awal, $akhir)
+{
+    // Master mangkat
+    $masterJam = new DateTime($awal);
+    $absenJam = new DateTime($akhir);
+    return $absenJam->diff($masterJam)->format('%h:%i:%s');
+}
+
+function keterangan($awal, $akhir, $status)
+{
+    $nilaiAwal = strtotime($awal);
+    $nilaiAkhir = strtotime($akhir);
+
+    if ($nilaiAkhir > $nilaiAwal && $status == 1) {
+        $result = "Datang Terlambat";
+    } else if ($nilaiAkhir < $nilaiAwal && $status == 2) {
+        $result = "Pulang Cepat";
+    } else {
+        $result = "-";
+    }
+
+    return $result;
+}
+
 function status($nilai)
 {
     return $nilai == 1 ? "Aktif" : "Tidak aktif";
