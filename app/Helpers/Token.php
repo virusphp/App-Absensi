@@ -58,6 +58,8 @@ function keterangan($awal, $akhir, $status)
             $result = "Datang Terlambat";
         } else if ($jamAbsen < $jamJadwal && $status == 2) {
             $result = "Pulang Cepat";
+        } else {
+            $result = "-";
         }
     } else {
         $result = "-";
