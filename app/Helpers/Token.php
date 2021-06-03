@@ -44,19 +44,21 @@ function selisih($awal, $akhir)
     } else {
         $masterJam = new DateTime($awal);
         $absenJam = new DateTime($akhir);
-        return $absenJam->diff($masterJam)->format('%h:%i:%s');
+        return $absenJam->diff($masterJam)->format('%H:%I:%S');
     }
 }
 
 function keterangan($awal, $akhir, $status)
 {
-    $nilaiAwal = strtotime($awal);
-    $nilaiAkhir = strtotime($akhir);
+    $jamJadwal = strtotime($awal);
+    $jamAbsen = strtotime($akhir);
 
-    if ($nilaiAkhir > $nilaiAwal && $status == 1) {
-        $result = "Datang Terlambat";
-    } else if ($nilaiAkhir < $nilaiAwal && $status == 2) {
-        $result = "Pulang Cepat";
+    if ($jamJadwal) {
+        if ($jamAbsen > $jamJadwal && $status == 1) {
+            $result = "Datang Terlambat";
+        } else if ($jamAbsen < $jamJadwal && $status == 2) {
+            $result = "Pulang Cepat";
+        }
     } else {
         $result = "-";
     }
