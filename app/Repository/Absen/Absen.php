@@ -71,10 +71,11 @@ class Absen
     public function getViewAbsenUnit($params)
     {
         return DB::table('absensi as a')->select(
-            'a.id', 'a.kd_pegawai', 'p.nama_pegawai', 'a.tanggal', 'a.jam', 'a.status_absen', 'a.generate_key', 'su.nama_sub_unit'
+            'a.id', 'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit', 'a.generate_key', 'p.kd_pegawai', 'p.nama_pegawai','ms.jam_masuk','ms.jam_keluar'
         )
             ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
             ->join('dbsimrs.dbo.pegawai as p', 'a.kd_pegawai','p.kd_pegawai')
+            ->leftJoin('master_shift as ms','a.kode_shift','ms.kode_shift')
             ->where('a.tanggal', $params->tanggal)
             ->where(function($query) use ($params) {
                 if ($params->kode_subunit != "") {

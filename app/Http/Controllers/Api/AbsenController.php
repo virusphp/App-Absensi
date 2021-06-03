@@ -107,7 +107,6 @@ class AbsenController extends Controller
     public function postDaftarAbsenUnit(Request $r)
     {
         $absen = $this->absen->getViewAbsenUnit($r);
-        // dd($absen);
 
         if ($absen->count() === 0) {
             $message = [
