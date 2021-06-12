@@ -55,7 +55,7 @@ function keterangan($awal, $akhir, $status, $kodeShift)
 
     if ($jamJadwal) {
        if ($kodeShift === "B") {
-            $result = "Jadwal Belum terinput!";
+            $result = "Jadwal Belum Terinput!";
        }  else {
             if ($jamAbsen > $jamJadwal && $status == 1) {
                 $result = "Datang Terlambat";
