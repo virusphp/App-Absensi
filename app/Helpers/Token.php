@@ -48,19 +48,23 @@ function selisih($awal, $akhir)
     }
 }
 
-function keterangan($awal, $akhir, $status)
+function keterangan($awal, $akhir, $status, $kodeShift)
 {
     $jamJadwal = strtotime($awal);
     $jamAbsen = strtotime($akhir);
 
     if ($jamJadwal) {
-        if ($jamAbsen > $jamJadwal && $status == 1) {
-            $result = "Datang Terlambat";
-        } else if ($jamAbsen < $jamJadwal && $status == 2) {
-            $result = "Pulang Cepat";
-        } else {
-            $result = "-";
-        }
+       if ($kodeShift === "B") {
+            $result = "Jadwal Belum terinput!";
+       }  else {
+            if ($jamAbsen > $jamJadwal && $status == 1) {
+                $result = "Datang Terlambat";
+            } else if ($jamAbsen < $jamJadwal && $status == 2) {
+                $result = "Pulang Cepat";
+            } else {
+                $result = "-";
+            }
+       }
     } else {
         $result = "-";
     }
