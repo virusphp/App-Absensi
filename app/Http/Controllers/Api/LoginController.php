@@ -8,16 +8,19 @@ use App\Validation\LoginValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repository\Akun\Akun;
+use App\Repository\Version\Version;
 use App\Transform\TransformAkun;
 
 class LoginController extends Controller
 {
     private $akun;
+    private $version;
     private $transform;
 
     public function __construct()
     {
         $this->akun = new Akun;
+        $this->version = new Version;
         $this->transform = new TransformAkun();
     }
 
@@ -35,7 +38,7 @@ class LoginController extends Controller
         if(!$verifMac) {
             $getPhone = $this->akun->getPhone($r);
             if ($getPhone) {
-                                $message = [
+                $message = [
                     "messageError" => "Smartphone tidak sesuai dengan smartphon terdaftar!! ($getPhone->device)"
                 ];
             }
@@ -46,6 +49,17 @@ class LoginController extends Controller
 
             return response()->jsonError(403, $message['messageError'],  $message);
         }
+
+        $checkVersion = $this->version->getVersion($r);
+        // dd($checkVersion);
+        if (!$checkVersion) {
+            $message = [
+                "messageError" => "Versi applikasi sudah usang silahkan perbarui aplikasi ( Update Aplikasi )!"
+            ];
+
+            return response()->jsonError(202, $message['messageError'], $message);
+        }
+
 
         $data = ["kd_pegawai" => $r->username, "password" => $r->password];
 
