@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use Image;
+use File;
 
 trait TraitBiodata
 {
@@ -22,6 +23,37 @@ trait TraitBiodata
 
     protected function getFoto($kodePegawai, $foto)
     {
+        // $width = config('photo.image.small.width');
+        // $height = config('photo.image.small.height');
+        
+        // $filename = $kodePegawai. ".jpg";
+        // $destination = config('photo.profil.directory');
+
+        // $storageDir = storage_path("app/public".DIRECTORY_SEPARATOR. $destination);
+
+        // if (!is_dir($storageDir)) {
+        //     File::makeDirectory($storageDir, 0777, true, true);
+        // }
+        // file_put_contents($storageDir.DIRECTORY_SEPARATOR.$filename, $foto);
+
+        // if (mime_content_type($storageDir.DIRECTORY_SEPARATOR.$kodePegawai.".jpg") == "image/jpeg") {
+        //     $canvas = Image::canvas($width, $height);
+
+        //     $image = Image::make($storageDir .DIRECTORY_SEPARATOR. $kodePegawai.".jpg")->resize($width, $height, function($constraint){
+        //         $constraint->aspectRatio();
+        //     });
+
+        //     $canvas->insert($image, "center");
+
+        //     $canvas->save($storageDir .DIRECTORY_SEPARATOR. $kodePegawai. ".jpg");
+
+        //     // $fullPath =  $destination . DIRECTORY_SEPARATOR. $filename;
+        //     $fullPath =  url("/") .DIRECTORY_SEPARATOR. "storage". $destination . DIRECTORY_SEPARATOR . $filename;
+        // } else {
+        //     $fullPath =  url('/') .DIRECTORY_SEPARATOR. "storage". $destination . DIRECTORY_SEPARATOR. $filename;
+            
+        //     return $fullPath;
+        // }
         $wid = 472;
         $hig = 709;
 

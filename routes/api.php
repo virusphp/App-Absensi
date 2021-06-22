@@ -41,6 +41,10 @@ Route::get('/unlock/device/user/{user}/pass/{pass}', 'UpdateSmartphoneController
         Route::get('/subunit', 'UnitController@getSubunit')->name('subunit.all');
 
         Route::group(["middleware" => ["token:api",]], function() {
+            // Assesment
+            Route::get('/assesment', 'AssesmentController@getAssesment');
+            Route::post('/assesment/detail', 'AssesmentController@getAssesmentDetail');
+
             Route::post('/absen', 'AbsenController@postAbsen')->name('absen');
             Route::post('/absen/ulang', 'AbsenController@reAbsen')->name('absen');
             Route::post('/daftar/absen', 'AbsenController@postDaftarAbsen')->name('daftar.absen');
