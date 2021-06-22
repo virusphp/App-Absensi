@@ -77,3 +77,17 @@ function status($nilai)
     return $nilai == 1 ? "Aktif" : "Tidak aktif";
 }
 
+function hari($nilai)
+{
+    $hari =  [
+        1 => "Senin",
+        2 => "selasa",
+        3 => "Rabu",
+        4 => "Kamis",
+        5 => "Jum'at",
+        6 => "Sabtu",
+        7 => "Minggu"
+    ];
+
+    return $hari[$nilai];
+}

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DaftarJadwalResource extends JsonResource
+class DaftarJadwalShiftResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,7 +15,7 @@ class DaftarJadwalResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'hari'          => hari($this->day_order),
+            'tanggal'       => $this->tanggal,
             'nama_shift'    => $this->nama_shift,
             'jam_masuk'     => waktu($this->jam_masuk),
             'jam_keluar'    => waktu($this->jam_keluar),
