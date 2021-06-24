@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class DaftarJadwalCollection extends ResourceCollection
+class HasilAssesmentCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,8 +15,8 @@ class DaftarJadwalCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'hasil_assesment' => $this->collection->map(function($absen) use ($request) {
-                return (new DaftarJadwalResource($absen))->toArray($request);
+            'hasil_assesment' => $this->collection->map(function($assesment) use ($request) {
+                return (new HasilAssesmentResource($assesment))->toArray($request);
             })
         ];
     }

@@ -45,6 +45,7 @@ Route::get('/unlock/device/user/{user}/pass/{pass}', 'UpdateSmartphoneController
             Route::get('/assesment', 'AssesmentController@getAssesment');
             Route::post('/assesment/detail', 'AssesmentController@getAssesmentDetail');
             Route::post('/assesment/post', 'AssesmentController@postAssesment');
+            Route::post('/assesment/hasil', 'AssesmentController@hasilAssesment');
 
             Route::post('/absen', 'AbsenController@postAbsen')->name('absen');
             Route::post('/absen/ulang', 'AbsenController@reAbsen')->name('absen');

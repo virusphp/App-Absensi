@@ -36,4 +36,14 @@ class Assesment
 				'score' 			=> $params->score
 			]);
 	}
+
+	public function getHasilAssesment($params)
+	{
+		return DB::connection('sqlsrv_sms')
+			->table('self_assesment_hasil as h')
+			->select('h.kode_pegawai','m.nama_assesment','h.tanggal_assesment','h.score')
+			->join('self_assesment_header as m', 'h.kode_assesment','m.kode_assesment')
+			->where('kode_pegawai', $params->kode_pegawai)
+			->get();
+	}
 }

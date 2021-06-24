@@ -3,18 +3,12 @@
 namespace App\Validation;
 use Validator;
 
-class AssesmentValidation
+class HasilAssesmentValidation
 {
     public function rules($request)
     {
         return Validator::make($request->all(), [
-            'kode_pegawai' => 'required|numeric|min:8',
-            'kode_assesment' => 'required',
-            'score' => 'required',
-        ],[
-            'required' => 'Tidak boleh kosong!!',
-            'min' => 'Minimal harus 8 digit!!', 
-            'numeric' => 'Parameter harus number!!'
+            'kode_pegawai' => 'required',
         ]);
     }
 
