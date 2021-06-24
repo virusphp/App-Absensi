@@ -24,4 +24,15 @@ class Assesment
 			->orderBy('sort', 'asc')
 			->get();
 	}
+
+	public function simpanAssesement($params)
+	{
+		return DB::connection('sqlsrv_sms')
+			->table('self_assesment_hasil')
+			->insert([
+				'kode_pegawai'      => $params->kode_pegawai,
+				'kode_assesment'    => $params->kode_assesment,
+				'tanggal_assesment' => date("Y-m-n H:i:s")
+			]);
+	}
 }
