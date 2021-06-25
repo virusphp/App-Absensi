@@ -10,6 +10,7 @@ use App\Repository\Assesment;
 use App\Validation\AssesmentValidation;
 use App\Validation\HasilAssesmentValidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AssesmentController extends Controller
 {
@@ -69,7 +70,10 @@ class AssesmentController extends Controller
         }
 
         $dataAssesment = $assesment->getHasilAssesment($r);
-        // dd($dataAssesment);
+
+        if (!$dataAssesment->count()) {
+            return response()->jsonError(201, "Data tidak ditemukan");
+        }
 
         $transform = new HasilAssesmentCollection($dataAssesment);
 

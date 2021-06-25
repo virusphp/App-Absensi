@@ -19,6 +19,8 @@ class HasilAssesmentResource extends JsonResource
             'nama_assesment'    => $this->nama_assesment,
             'tanggal_assesment' => $this->tanggal_assesment,
             'score'             => $this->score,
+            'symbol_warna'      => $this->symbol_warna,
+            'keterangan'        => $this->keterangan,
         ];
     }
 }
