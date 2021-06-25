@@ -16,7 +16,7 @@ class HasilAssesmentResource extends JsonResource
     {
         return [
             'kode_pegawai'      => $this->kode_pegawai,
-            'kode_assesment'    => $this->kode_assesment,
+            'nama_assesment'    => $this->nama_assesment,
             'tanggal_assesment' => $this->tanggal_assesment,
             'score'             => $this->score,
         ];

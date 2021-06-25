@@ -69,7 +69,7 @@ class AssesmentController extends Controller
         }
 
         $dataAssesment = $assesment->getHasilAssesment($r);
-        dd($dataAssesment);
+        // dd($dataAssesment);
 
         $transform = new HasilAssesmentCollection($dataAssesment);
 

@@ -32,7 +32,7 @@ class Assesment
 			->insert([
 				'kode_pegawai'      => $params->kode_pegawai,
 				'kode_assesment'    => $params->kode_assesment,
-				'tanggal_assesment' => date("Y-m-n H:i:s"),
+				'tanggal_assesment' => date("Y-m-d H:i:s"),
 				'score' 			=> $params->score
 			]);
 	}
