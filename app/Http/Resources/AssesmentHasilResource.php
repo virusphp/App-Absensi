@@ -15,7 +15,7 @@ class AssesmentHasilResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'hasil_assesment' => $this->resource
+            'proses_assesment' => $this->resource
         ];
     }
 }

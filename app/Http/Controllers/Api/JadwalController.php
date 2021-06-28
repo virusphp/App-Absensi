@@ -51,18 +51,19 @@ class JadwalController extends Controller
 
     }
 
-    // public function postDaftarJadwalUnit(Request $r)
-    // {
-    //     $jadwal = $this->jadwal->getDaftarJadwalUnit($r);
+    public function postDaftarJadwalUnit(Request $r)
+    {
+        $jadwal = $this->jadwal->getDaftarJadwalUnit($r);
+        dd($jadwal);
 
-    //     if ($jadwal->count() === 0) {
-    //         $message = [
-    //             "messageError" => "Belum ada Jadwal Unit"
-    //         ];
-    //         return response()->jsonError(201, $message['messageError'], $message);
-    //     }
+        if ($jadwal->count() === 0) {
+            $message = [
+                "messageError" => "Belum ada Jadwal Unit"
+            ];
+            return response()->jsonError(201, $message['messageError'], $message);
+        }
 
-    //     $transform = new DaftarJadwalCollection($jadwal);
-    //     return response()->jsonSuccess(200, "Daftar Jadwal", $transform);
-    // }
+        $transform = new DaftarJadwalCollection($jadwal);
+        return response()->jsonSuccess(200, "Daftar Jadwal", $transform);
+    }
 }
