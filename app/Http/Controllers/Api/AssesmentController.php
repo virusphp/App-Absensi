@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AssesmentCollection;
 use App\Http\Resources\AssesmentDetailCollection;
+use App\Http\Resources\AssesmentHasilResource;
 use App\Http\Resources\HasilAssesmentCollection;
+use App\Http\Resources\HasilAssesmentResource;
 use App\Repository\Assesment;
 use App\Validation\AssesmentValidation;
 use App\Validation\HasilAssesmentValidation;
@@ -49,14 +51,18 @@ class AssesmentController extends Controller
             $message = $valid->messages($validate->errors());
             return response()->jsonError(422,  implode(",",$message), $message);
         }
-
-        $saveAssesment = $assesment->simpanAssesement($r);
+        $date = date('Y-m-d H:i:s');
+        $saveAssesment = $assesment->simpanAssesement($r, $date);
 
         if (!$saveAssesment) {
             return response()->jsonError(201, "Data tidak bisa di simpan!" );
         }
 
-        return response()->jsonSuccess(200, "Data Berhasil di simpan", "");
+        $dataAssessment = $assesment->getDataAssesment($r, $date);
+
+        $transform = new AssesmentHasilResource($dataAssessment);
+
+        return response()->jsonSuccess(200, "Data Berhasil di simpan", $transform);
 
     }
 

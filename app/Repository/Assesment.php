@@ -25,9 +25,9 @@ class Assesment
 			->get();
 	}
 
-	public function simpanAssesement($params)
+	public function simpanAssesement($params, $date)
 	{
-		 $cekWarna =  DB::connection('sqlsrv_sms')
+		$cekWarna =  DB::connection('sqlsrv_sms')
                         ->table('self_assesment_warna')
                         ->where('kode_assesment',$params->kode_assesment)
                         ->get();
@@ -44,10 +44,25 @@ class Assesment
 			->insert([
 				'kode_pegawai'      => $params->kode_pegawai,
 				'kode_assesment'    => $params->kode_assesment,
-				'tanggal_assesment' => date("Y-m-d H:i:s"),
+				'tanggal_assesment' => $date,
 				'score' 			=> $params->score,
 				'assesment_warna_id'=> $warna
 			]);
+
+	}
+
+	public function getDataAssesment($params, $date)
+	{
+		return DB::connection('sqlsrv_sms')
+			->table('self_assesment_hasil as h')
+			->select('h.kode_pegawai','m.nama_assesment','h.tanggal_assesment','h.score','w.symbol_warna','w.keterangan')
+			->join('self_assesment_header as m', 'h.kode_assesment','m.kode_assesment')
+			->join('self_assesment_warna as w', 'h.assesment_warna_id','w.id')
+			->where([
+				['h.kode_pegawai', $params->kode_pegawai],
+				['h.tanggal_assesment', $date]
+			])
+			->first();
 	}
 
 	public function getHasilAssesment($params)

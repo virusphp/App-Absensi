@@ -15,7 +15,7 @@ class DaftarJadwalCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'hasil_assesment' => $this->collection->map(function($absen) use ($request) {
+            'jadwal_non_shift' => $this->collection->map(function($absen) use ($request) {
                 return (new DaftarJadwalResource($absen))->toArray($request);
             })
         ];
