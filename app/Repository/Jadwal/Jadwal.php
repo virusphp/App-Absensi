@@ -50,7 +50,7 @@ class Jadwal
     public function getDaftarJadwal($params)
     {   
         return DB::table('jadwal_shift_header as jh')
-            ->select('jd.tanggal','ms.nama_shift','ms.jam_masuk','ms.jam_keluar')
+            ->select('jd.tanggal','ms.kode_shift','ms.nama_shift','ms.jam_masuk','ms.jam_keluar')
             ->join('jadwal_shift_detail as jd', 'jh.kode_pegawai','jd.kode_pegawai')
             ->leftJoin('master_shift as ms', 'jd.kode_shift', '=', 'ms.kode_shift')
             ->where('jh.kode_pegawai', $params->kode_pegawai)
@@ -60,7 +60,7 @@ class Jadwal
     public function getJadwalNonShif($params)
     {
         return DB::table('jadwal_non_shift as jns')
-            ->select('jd.day_order','ms.nama_shift','ms.jam_masuk','ms.jam_keluar')
+            ->select('jd.day_order','ms.kode_shift','ms.nama_shift','ms.jam_masuk','ms.jam_keluar')
             ->join('jadwal_detail as jd', 'jns.kode_jadwal','jd.kode_jadwal')
             ->leftJoin('master_shift as ms', 'jd.kode_shift','ms.kode_shift')
             ->where('jns.kode_pegawai', $params->kode_pegawai)

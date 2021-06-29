@@ -16,6 +16,7 @@ class DaftarJadwalResource extends JsonResource
     {
         return [
             'hari'          => hari($this->day_order),
+            'kode_shift'    => $this->kode_shift,
             'nama_shift'    => $this->nama_shift,
             'jam_masuk'     => waktu($this->jam_masuk),
             'jam_keluar'    => waktu($this->jam_keluar),
