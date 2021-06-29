@@ -78,7 +78,10 @@ class AssesmentController extends Controller
         $dataAssesment = $assesment->getHasilAssesment($r);
 
         if (!$dataAssesment->count()) {
-            return response()->jsonError(201, "Data tidak ditemukan");
+             $message = [
+                "messageError" => "Data tidak ditemukan!"
+            ];
+            return response()->jsonError(201, "Data tidak ditemukan", $message);
         }
 
         $transform = new HasilAssesmentCollection($dataAssesment);

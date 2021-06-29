@@ -73,6 +73,7 @@ class Assesment
 			->join('self_assesment_header as m', 'h.kode_assesment','m.kode_assesment')
 			->join('self_assesment_warna as w', 'h.assesment_warna_id','w.id')
 			->where('kode_pegawai', $params->kode_pegawai)
+			->orderBy('h.tanggal_assesment', 'desc')
 			->get();
 	}
 }
