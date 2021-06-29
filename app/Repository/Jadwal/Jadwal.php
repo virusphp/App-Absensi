@@ -49,11 +49,19 @@ class Jadwal
     
     public function getDaftarJadwal($params)
     {   
-        return DB::table('jadwal_shift_header as jh')
+
+        return DB::table('jadwal_shift_detail as jd')
             ->select('jd.tanggal','ms.kode_shift','ms.nama_shift','ms.jam_masuk','ms.jam_keluar')
-            ->join('jadwal_shift_detail as jd', 'jh.kode_pegawai','jd.kode_pegawai')
             ->leftJoin('master_shift as ms', 'jd.kode_shift', '=', 'ms.kode_shift')
-            ->where('jh.kode_pegawai', $params->kode_pegawai)
+            ->where('jd.kode_pegawai',$params->kode_pegawai)
+            ->whereYear('jd.tanggal', $params->tahun)
+            ->whereMonth('jd.tanggal', $params->bulan)
+            // ->where([
+            //     ['jd.kode_pegawai', $params->kode_pegawai],
+            //     ['jd.tanggal', $params->bulan],
+            //     ['jd.tanggal', $params->tahun]
+            // ]
+            // )
             ->get();
     }
 
