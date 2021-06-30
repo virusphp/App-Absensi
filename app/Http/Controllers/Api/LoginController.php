@@ -47,7 +47,7 @@ class LoginController extends Controller
                     "messageError" => "Smartphone belum terdaftar pada aplikasi presensi!!! Silahkan Mendaftar!!"
             ];
 
-            return response()->jsonError(403, $message['messageError'],  $message);
+            return response()->jsonError(401, $message['messageError'],  $message);
         }
 
         $checkVersion = $this->version->getVersion($r);
