@@ -8,6 +8,7 @@ use App\Http\Resources\DaftaAbsenResource;
 use App\Http\Resources\DaftarAbsenCollection;
 use App\Http\Resources\DaftarAbsenUnitCollection;
 use App\Repository\Absen\Absen;
+use App\Repository\Jadwal\Jadwal;
 use App\Transform\TransformAbsen;
 use App\Validation\AbsenValidation;
 use App\Validation\DaftarAbsenValidation;
@@ -17,10 +18,12 @@ class AbsenController extends Controller
 {
     protected $absen;
     protected $transform;
+    protected $jadwal;
 
     public function __construct()
     {
         $this->absen = new Absen;
+        $this->jadwal = new Jadwal;
         $this->transform = new TransformAbsen;
     }
 
@@ -68,7 +71,18 @@ class AbsenController extends Controller
             return response()->jsonError(403, $message['messageError'], $message); 
         }
 
-        $absen = $this->absen->simpan($r);
+        $jadwal =  $this->jadwal->getDaftarShift($r);
+        if (!$jadwal) {
+            $jadwal = $this->jadwal->getDaftarNonShift($r);
+            if(!$jadwal) {
+                $message = [
+                    "messageError" => "Jadwal Belum di input hubungi kepegawaian!!"
+                ];
+                return response()->jsonError(201, $message['messageError'], $message);
+            }
+        } 
+
+        $absen = $this->absen->simpan($r, $jadwal);
         
         if (!$absen) {
             $message = [
@@ -90,7 +104,18 @@ class AbsenController extends Controller
             return response()->jsonError(422, implode(",", $message), $message);
         }
 
-        $absen = $this->absen->simpan($r);
+        $jadwal =  $this->jadwal->getDaftarShift($r);
+        if (!$jadwal) {
+            $jadwal = $this->jadwal->getDaftarNonShift($r);
+            if(!$jadwal) {
+                $message = [
+                    "messageError" => "Jadwal Belum di input hubungi kepegawaian!!"
+                ];
+                return response()->jsonError(201, $message['messageError'], $message);
+            }
+        } 
+
+        $absen = $this->absen->simpan($r, $jadwal);
         
         if (!$absen) {
             $message = [

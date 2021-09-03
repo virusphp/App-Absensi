@@ -48,6 +48,15 @@ function selisih($awal, $akhir)
     }
 }
 
+function selisihMenit($nilai)
+{
+    $jamToMenit = date('H', strtotime($nilai)) * 60;
+    $menitToMenit = date('i', strtotime($nilai));
+    $detikToMenit = date('s', strtotime($nilai)) / 60;
+
+    return (int)($jamToMenit + $menitToMenit + $detikToMenit);
+}
+
 function keterangan($awal, $akhir, $status, $kodeShift)
 {
     $jamJadwal = strtotime($awal);

@@ -47,7 +47,6 @@ class LoginController extends Controller
                 $message = [
                         "messageError" => "Smartphone belum terdaftar pada aplikasi presensi!!! Silahkan Mendaftar!!"
                 ];
-
             }
 
             return response()->jsonError(401, $message['messageError'],  $message);
