@@ -6,8 +6,13 @@ use DB;
 
 class Presensi 
 {
-	public function getPresensi($statusAbsesn)
+	public function getPresensi($statusAbsen, $terlambat)
 	{
-		return DB::table('absensi_presensi')->select('kode_presensi', 'menit')->where('status_absen', $statusAbsesn)->get();
+		return DB::table('absensi_presensi')->select('kode_presensi', 'menit')
+				->where([
+					['status_absen', $statusAbsen],
+					['menit', '>=', 70]
+				])->first();
 	}
+
 }

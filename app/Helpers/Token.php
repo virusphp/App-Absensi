@@ -42,19 +42,22 @@ function selisih($awal, $akhir)
     if ($awal == null) {
         return "-";
     } else {
-        $masterJam = new DateTime($awal);
-        $absenJam = new DateTime($akhir);
-        return $absenJam->diff($masterJam)->format('%H:%I:%S');
+        $masterJam = strtotime($awal);
+        $absenJam = strtotime($akhir);
+        if ($absenJam < $masterJam) {
+            return 0;
+        } else {
+            return $absenJam - $masterJam; 
+        }
+       
     }
 }
 
-function selisihMenit($nilai)
+function selisihMenit($nilai) : int
 {
-    $jamToMenit = date('H', strtotime($nilai)) * 60;
-    $menitToMenit = date('i', strtotime($nilai));
-    $detikToMenit = date('s', strtotime($nilai)) / 60;
-
-    return (int)($jamToMenit + $menitToMenit + $detikToMenit);
+    $nilaiToMenit = (int) $nilai / 60;
+    
+    return (int)($nilaiToMenit);
 }
 
 function keterangan($awal, $akhir, $status, $kodeShift)

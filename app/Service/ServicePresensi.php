@@ -26,19 +26,9 @@ class ServicePresensi
 
 		$selisihMenit = selisihMenit($selisih);
 
-		$presensi = $this->presensi->getPresensi($statuAbsen);
+		$presensi = $this->presensi->getPresensi($statuAbsen, $selisihMenit);
 
-		$kodePresensi = '';
-		foreach($presensi as $val) {
-			if ($selisihMenit <= $val->menit) {
-				$kodePresensi = $val->kode_presensi;
-			} else {
-				$kodePresensi = $val->kode_presensi;
-			}
-
-		}
-
-		return $kodePresensi;	
+		return ($presensi == null) ? 'M5' : $presensi->kode_presensi;	
 
 	}
 }
