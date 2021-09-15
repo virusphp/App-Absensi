@@ -28,7 +28,15 @@ class ServicePresensi
 
 		$presensi = $this->presensi->getPresensi($statuAbsen, $selisihMenit);
 
-		return (($presensi == null && $statuAbsen == 1) ? 'M5' : ($presensi == null && $statuAbsen == 2) ? 'P5' : $presensi->kode_presensi);	
+		if ($presensi == null && $statuAbsen == 1) {
+			$kodePresensi = "M5";
+		} else if ($presensi == null && $statuAbsen == 2) {
+			$kodePresensi = "P5"; 
+		} else {
+			$kodePresensi = $presensi->kode_presensi;
+		}
+
+		return $kodePresensi;
 
 	}
 }
