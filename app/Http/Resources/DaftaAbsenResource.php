@@ -26,7 +26,7 @@ class DaftaAbsenResource extends JsonResource
                 'jam'           => waktu($this->jam),
                 $key            => waktu($value),
                 'jam_absen'     => waktu($this->jam),
-                'selisih'       => selisih($value, $this->jam),
+                'selisih'       => selisihMenit(selisih($value, $this->jam))." Menit",
                 'keterangan'    => keterangan($value, $this->jam, $this->status_absen, $this->kode_shift),
                 'status_absen'  => absensi($this->status_absen),
                 'nama_unit'     => $this->nama_sub_unit,
