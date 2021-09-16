@@ -72,7 +72,7 @@ class AbsenController extends Controller
         }
 
         $jadwal =  $this->jadwal->getDaftarShift($r);
-        if (!$jadwal) {
+        if (!$jadwal->kode_shift) {
             $jadwal = $this->jadwal->getDaftarNonShift($r);
             if(!$jadwal) {
                 $message = [
