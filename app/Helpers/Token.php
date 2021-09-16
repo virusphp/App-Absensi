@@ -31,9 +31,22 @@ function waktu($nilai)
     return $result;
 }
 
+
 function tanggalNilai($nilai)
 {
     return date("N", strtotime($nilai));
+}
+
+function waktuTerlambat($awal, $akhir)
+{
+    if ($awal == null) {
+        return "-";
+    } else {
+        $masterJam = new DateTime($awal);
+        $absenJam = new DateTime($akhir);
+        return $absenJam->diff($masterJam)->format("%H:%I:%S");
+    }
+
 }
 
 function selisih($awal, $akhir)
