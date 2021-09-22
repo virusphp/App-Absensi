@@ -29,7 +29,7 @@ class DaftarAbsenUnitResource extends JsonResource
             'jam'          => waktu($this->jam),
             $key           => waktu($value),
             'jam_absen'    => waktu($this->jam),
-            'selisih'      => selisih($value, $this->jam),
+            'selisih'      => waktuTerlambat($value, $this->jam),
             'keterangan'   => keterangan($value, $this->jam, $this->status_absen, $this->kode_shift),
             'status_absen' => absensi($this->status_absen),
             'generate_key' => generateKey($this->generate_key),

@@ -38,7 +38,6 @@ class AbsenController extends Controller
         
         $absen = $this->absen->getDaftarAbsen($r);
         // dd($absen);
-        // dd($absen->count() === 0);
 
         if ($absen->count() === 0) {
             $message = [
@@ -72,7 +71,7 @@ class AbsenController extends Controller
         }
 
         $jadwal =  $this->jadwal->getDaftarShift($r);
-        if (!$jadwal || !isset($jadwal->kode_shift)) {
+        if (!$jadwal) {
             $jadwal = $this->jadwal->getDaftarNonShift($r);
             if(!$jadwal) {
                 $message = [
