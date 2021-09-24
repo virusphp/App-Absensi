@@ -58,7 +58,7 @@ class Absen
     public function getDaftarAbsen($params)
     {
         return DB::table('absensi as a')->select(
-           'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit', 'a.generate_key', 'ms.jam_masuk','ms.jam_keluar', 'a.kode_shift', 'kd_jns_pegawai'
+           'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit', 'a.generate_key', 'ms.jam_masuk','ms.jam_keluar', 'a.kode_shift', 'p.kd_jns_pegawai'
         )
             ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
             ->leftJoin('master_shift as ms','a.kode_shift','ms.kode_shift')
@@ -73,7 +73,7 @@ class Absen
     public function getViewAbsenUnit($params)
     {
         return DB::table('absensi as a')->select(
-            'a.id', 'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit', 'a.generate_key', 'p.kd_pegawai', 'p.nama_pegawai','ms.jam_masuk','ms.jam_keluar', 'a.kode_shift'
+            'a.id', 'a.tanggal', 'a.jam', 'a.status_absen', 'su.nama_sub_unit', 'a.generate_key', 'p.kd_pegawai', 'p.nama_pegawai','ms.jam_masuk','ms.jam_keluar', 'a.kode_shift', 'p.kd_jns_pegawai'
         )
             ->join('dbsimrs.dbo.sub_unit as su', 'a.kd_sub_unit','su.kd_sub_unit')
             ->join('dbsimrs.dbo.pegawai as p', 'a.kd_pegawai','p.kd_pegawai')
