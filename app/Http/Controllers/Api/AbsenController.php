@@ -71,6 +71,16 @@ class AbsenController extends Controller
         }
 
         $jadwal =  $this->jadwal->getDaftarShift($r);
+
+        if (isset($jadwal)) {
+            if ($jadwal->kode_shift == NULL) {
+                $message = [
+                    "messageError" => "Jadwal Belum di input hubungi kepegawaian!!"
+                ];
+                return response()->jsonError(201, $message['messageError'], $message);
+            }
+        }
+
         if (!$jadwal) {
             $jadwal = $this->jadwal->getDaftarNonShift($r);
             if(!$jadwal) {
