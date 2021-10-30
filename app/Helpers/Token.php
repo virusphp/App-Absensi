@@ -12,7 +12,17 @@ function generate_token($kode, $password)
 
 function absensi($status)
 {
-    return $status == 1 ? "Masuk" : "Keluar" ;
+    if ($status == 1) {
+        $keterangan = "Masuk";
+    } else if($status == 2) {
+        $keterangan = "Keluar";
+    } else if ($status == 3) {
+        $keterangan = "Lembur Masuk";
+    } else {
+        $keterangan = "Lembur Keluar";
+    }
+
+    return $keterangan;
 }
 
 function tanggal($nilai)

@@ -20,13 +20,19 @@ class ServicePresensi
 	{
 		$jamShift = $this->masterShift->getShift($kodeShift);
 
-		$jamShift = $statuAbsen == "1" ? $jamShift->jam_masuk : $jamShift->jam_keluar;
+		$jamShift = $statuAbsen == "1" || "3" ? $jamShift->jam_masuk : $jamShift->jam_keluar;
 
 		$selisih = selisih($jamShift, $jamPresensi);
 
 		$selisihMenit = selisihMenit($selisih);
 
-		$presensi = $this->presensi->getPresensi($statuAbsen, $selisihMenit);
+		if ($statuAbsen == 1 || $statuAbsen == 2) {
+			$presensi = $this->presensi->getPresensi($statuAbsen, $selisihMenit);
+		}
+
+		if ($statuAbsen == 3 || $statuAbsen == 4) {
+			$presensi = $this->presensi->getLembur($statuAbsen);
+		}
 
 		if ($presensi == null && $statuAbsen == 1) {
 			$kodePresensi = "M5";
