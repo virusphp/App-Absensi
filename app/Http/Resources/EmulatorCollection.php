@@ -15,7 +15,7 @@ class EmulatorCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'emulator' => $this->collection->map(function($emulator) use ($request) {
+            'setupapp' => $this->collection->map(function($emulator) use ($request) {
                 return (new EmulatorResource($emulator))->toArray($request);
             })
         ];
