@@ -26,7 +26,7 @@ Route::get('/tanggalserver', function(){
 
 Route::group(['namespace' => 'Api'], function() {
 
-Route::get('/unlock/device/user/{user}/pass/{pass}', 'UpdateSmartphoneController@unlockDevice');
+    Route::get('/unlock/device/user/{user}/pass/{pass}', 'UpdateSmartphoneController@unlockDevice');
     Route::post('/access/register', 'RegistrasiPlatformController@register')->name('register.acceess');
     Route::post('/access/login', 'LoginPlatformController@login')->name('login.acceess');
 
@@ -36,9 +36,12 @@ Route::get('/unlock/device/user/{user}/pass/{pass}', 'UpdateSmartphoneController
         Route::post('/login', 'LoginController@login')->name('login.api');
         Route::post('/edit/smartphone', 'UpdateSmartphoneController@editSmartphone')->name('edit.smartphone');
         Route::post('/update/smartphone', 'UpdateSmartphoneController@updateSmartphone')->name('update.smartphone');
+
         Route::get('/pegawai', 'PegawaiController@getPegawai')->name('pegawai.all');
         Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
         Route::get('/subunit', 'UnitController@getSubunit')->name('subunit.all');
+        Route::get('/operator', 'OperatorController@getOperator')->name('operator.all');
+        Route::get('/emulator', 'EmulatorController@getEmulator')->name('emulator.all');
 
         Route::group(["middleware" => ["token:api",]], function() {
             // Assesment
