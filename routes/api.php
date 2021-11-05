@@ -41,7 +41,7 @@ Route::group(['namespace' => 'Api'], function() {
         Route::get('/pegawai/{pegawai}', 'PegawaiController@getPegawaiDetail')->name('pegawai.detail');
         Route::get('/subunit', 'UnitController@getSubunit')->name('subunit.all');
         Route::get('/operator', 'OperatorController@getOperator')->name('operator.all');
-        Route::get('/emulator', 'EmulatorController@getEmulator')->name('emulator.all');
+        Route::get('/setupapp', 'EmulatorController@getEmulator')->name('emulator.all');
 
         Route::group(["middleware" => ["token:api",]], function() {
             // Assesment
