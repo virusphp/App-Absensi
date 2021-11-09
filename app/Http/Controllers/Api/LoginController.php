@@ -8,6 +8,7 @@ use App\Validation\LoginValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repository\Akun\Akun;
+use App\Repository\Setup\Setup;
 use App\Repository\Version\Version;
 use App\Transform\TransformAkun;
 
@@ -15,12 +16,14 @@ class LoginController extends Controller
 {
     private $akun;
     private $version;
+    private $setup;
     private $transform;
 
     public function __construct()
     {
         $this->akun = new Akun;
         $this->version = new Version;
+        $this->setup = new Setup;
         $this->transform = new TransformAkun();
     }
 
@@ -52,6 +55,12 @@ class LoginController extends Controller
             return response()->jsonError(401, $message['messageError'],  $message);
         }
 
+        $checkSetup = $this->setup->checking();
+
+        if ($checkSetup->cek_version !== "1") {
+            return $this->loged($r);
+        }
+
         $checkVersion = $this->version->getVersion($r);
         // dd($checkVersion);
         if (!$checkVersion) {
@@ -62,7 +71,11 @@ class LoginController extends Controller
             return response()->jsonError(202, $message['messageError'], $message);
         }
 
+        return $this->loged($r);
+    }
 
+    protected function loged($r)
+    {
         $data = ["kd_pegawai" => $r->username, "password" => $r->password];
 
         if (!Auth::guard("akun")->attempt($data)) {
