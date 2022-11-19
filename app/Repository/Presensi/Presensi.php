@@ -11,8 +11,8 @@ class Presensi
 		return DB::table('absensi_presensi')->select('kode_presensi', 'start', 'menit')
 				->where([
 					['status_absen', $statusAbsen],
-					['start', '>=', $terlambat],
-					['menit', '<=', $terlambat]
+					['start', '<=', $terlambat],
+					['menit', '>=', $terlambat]
 				])
 				->first();
 	}

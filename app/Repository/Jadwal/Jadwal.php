@@ -62,6 +62,7 @@ class Jadwal
             //     ['jd.tanggal', $params->tahun]
             // ]
             // )
+            ->orderBy('jd.tanggal', 'asc')
             ->get();
     }
 
